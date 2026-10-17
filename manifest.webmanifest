@@ -1,0 +1,14 @@
+{
+  "name": "Suivi de recharge",
+  "short_name": "Recharge",
+  "description": "Suivi des recharges, coûts, consommation et batterie.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#EDF1F0",
+  "theme_color": "#16222B",
+  "lang": "fr",
+  "icons": [
+    {"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}
+  ]
+}
