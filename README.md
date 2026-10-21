@@ -1,5 +1,5 @@
-# Suivi de recharge — PWA
+# Suivi de recharge — PWA GitHub Pages
 
-Dépose tous les fichiers de ce dossier à la racine de ton dépôt GitHub, puis active **Settings > Pages > Deploy from a branch > main / root**.
+Dépose tous les fichiers à la racine du dépôt GitHub, puis active **Settings → Pages → Deploy from a branch → main → / (root)**.
 
-L'application pourra ensuite être ajoutée à l'écran d'accueil sur iPhone/Android et fonctionnera hors ligne après la première visite.
+Le site contient une directive `noindex, nofollow, noarchive`. Il reste toutefois publiquement accessible à toute personne qui connaît son adresse.

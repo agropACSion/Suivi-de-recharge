@@ -9,8 +9,10 @@
 <meta name="apple-mobile-web-app-title" content="Recharge">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#16222B">
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon.svg" type="image/svg+xml">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="description" content="Suivi personnel des recharges de véhicule électrique">
+<link rel="manifest" href="./manifest.webmanifest">
+
 <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADrUlEQVR4nO3dwXHbQBBE0ZGDUAC6KgKH4xgch2NwOE7LB7gkmmQvdhcQuTP9XwQ4/GoMWUXp5fXtPYB7vj37AbAu4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTgmff/969mP8OWIY4ZDGUEcaCCOYdts/Pnx89kP8uWIY4zJC2VDHJCIY4DVbARx9HMrI4hjjsM1GsTRyXA2gjh6eJYRxLHLtowgDjQQR8vd2TC5RoM4GpxfKBvigEQc9zEbQRx3UcaGOCARx7X2bPh8VAniuMIL5RJxQCKOT8zGFeL4hzJuEccAq2s0iGPDbNxFHJQhEQck9ziYjQbrOIbKcLtGwzkONmOXbxzYZRoHs9HDMQ7K6OQYxwTDazQM42A2+nnFQRlDvOLAEKM4mI1RLnEcKcPzGg2fODDBIg5eKHPqx0EZ0+rHgWnF42A2jqgcxyll2H5Uidpx4KCycfBCOa5mHJRxioJxUMZZCsZxIudrNOrFwWyc6OX17f3Zz3CapGUsu0/VliOdZcuISnEknY2VFYkjaRkrz0aUiSOjxcuIGnEknY31pY8jaRnrz0YUiCOjFGVE9jiSzkYWieNIWkaW2YjUcWSUqIzIG0fS2cglZRxJy8g1G5E0jozSlREZ40g6GxkliyNpGRlnI3LFQRkPlikOPFiaOJiNx8sRB2U8RY44MspeRqSII+lsFLB6HEnLKDAbsX4cGdUoIxaPI+lslFHqR01zzk2wzGzE4suRTqUygjh4czW4x3GiYrMRxHGWemUEcaCBOE5QcjbCPA7+FmWbdRxoI45DCs9GEMcRtcsI5zj4+muXbxwHlZ+NII45DmUEcaCBOIaZzEbYxjF9jfqUEbZxoAdxDLCajSCOfm5lBHGgwTGOiWvUcDbCM45RnmUEcaCBOHbYzkYYxjF0cDiXEYZxoB9xSOazEcShUEYQBxq84ui8RpmNjVccPSjjA3FAIo7/MBuXiOMTZVwxiqN9jVLGLaM4MIo4IpgNgTgoQ3KJg1/GTnCJQ2E2GqzjoIw26zjQ5hsHs7HLIo7ba5QyeljEgTmOcTAbnezioIx+dnGgX/04Lq9RZmNI/Tg+UMYoozgwyiUOZmNC8Ti2g4My5hSPA0fUj4PZmMb/lYVUfzkwjTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIA9JfcpzHVp6z2a0AAAAASUVORK5CYII=">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -174,6 +176,42 @@
   .hrow .acts { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 6px; }
   .hrow .acts button { min-width: 96px; }
   .hrow.editing { display: block; }
+  [hidden] { display: none !important; }
+  .tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin: 0 0 16px; }
+  .tabs button { flex: 1; background: transparent; color: var(--muted); border: 0; border-radius: 9px; }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+  .hero { background: linear-gradient(135deg, #0E3F44 0%, #1B7F79 100%); color: #fff; border: 0; padding: 22px 18px; }
+  .hero h2 { color: rgba(255,255,255,.88); font-size: 1rem; font-weight: 600; margin: 0; }
+  .hero .r-v { font-size: 3.6rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin: 4px 0; }
+  .hero .r-v small { font-size: 1.2rem; font-weight: 500; opacity: .85; }
+  .hero .r-sub, .hero .r-basis { color: rgba(255,255,255,.88); font-size: .92rem; margin: 0; }
+  .gauge { position: relative; height: 14px; border-radius: 7px; background: rgba(255,255,255,.18); margin: 18px 0 4px; }
+  .gauge .band { position: absolute; top: 0; bottom: 0; border-radius: 7px; background: rgba(255,255,255,.45); }
+  .gauge .mark { position: absolute; top: -4px; width: 6px; height: 22px; margin-left: -3px; border-radius: 3px; background: #fff; }
+  .gl2 { display: flex; justify-content: space-between; font-size: .8rem; color: rgba(255,255,255,.8); }
+  .r-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 18px 0 14px; }
+  .r-tiles div { background: rgba(255,255,255,.12); border-radius: 10px; padding: 10px 6px; text-align: center; }
+  .r-tiles b { display: block; font-size: 1.25rem; line-height: 1.2; }
+  .r-tiles span { font-size: .8rem; color: rgba(255,255,255,.85); }
+  .hero label { color: #fff; }
+  .hero input[type=range] { width: 100%; accent-color: #fff; min-height: 32px; }
+  .hero select { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.4); min-height: 38px; margin-top: 6px; }
+  .hero select option { color: #16222B; }
+  .hero .r-out { font-size: 1.1rem; font-weight: 600; margin: 2px 0 14px; }
+  .hero .r-basis { margin-top: 10px; }
+  .r-empty { margin: 8px 0; }
+  .chart { margin-top: 20px; }
+  .chart h3 { font-size: 1rem; margin: 0 0 2px; }
+  .chart .cap { color: var(--muted); font-size: .85rem; margin: 0 0 6px; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .chart .ax { fill: var(--muted); font-size: 13px; }
+  .chart .gl { stroke: var(--line); stroke-width: 1; }
+  .chart .tp { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  .donut-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .donut { width: 150px; height: 150px; flex: none; }
+  .donut .dv { fill: var(--ink); font-size: 20px; font-weight: 700; }
+  .donut .dk { fill: var(--muted); font-size: 11px; }
+  .donut-row table { flex: 1; min-width: 220px; }
 </style>
 </head>
 <body>
@@ -181,6 +219,11 @@
   <h1>Suivi de recharge</h1>
   <p class="lede">Note les kWh, les kilomètres et le niveau de batterie de chaque charge : coût, consommation et rendement de charge se calculent tout seuls.</p>
 
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" id="tab-saisie" data-tab="saisie" aria-selected="true">Saisie</button>
+    <button type="button" role="tab" id="tab-synth" data-tab="synth" aria-selected="false">Synthèse</button>
+  </nav>
+  <div id="view-saisie" role="tabpanel" aria-labelledby="tab-saisie">
   <details class="card" id="tarifs">
     <summary>Mes tarifs et batterie <span class="hint" id="tarifs-hint"></span></summary>
     <div class="grid three">
@@ -283,6 +326,29 @@
     <p class="warn" id="form-error" role="alert"></p>
   </section>
 
+
+  <section class="card" aria-labelledby="h-hist">
+    <h2 id="h-hist">Historique</h2>
+    <div id="hist"></div>
+  </section>
+
+  <details class="card" id="backup">
+    <summary>Sauvegarde et import <span class="hint">CSV</span></summary>
+    <p class="note-line" style="margin-top:0">Les données sont gardées dans ce navigateur, sur cet appareil. Pour les conserver ailleurs ou les changer d'appareil, exporte-les en CSV puis colle-les ici pour les importer.</p>
+    <textarea id="csv" aria-label="Contenu CSV" placeholder="date;tarif;kwh;prix_kwh;note;km;compteur_debut;compteur_fin;batt_avant;batt_apres;session"></textarea>
+    <div class="actions">
+      <button type="button" class="ghost" id="export">Exporter en CSV</button>
+      <button type="button" class="ghost" id="copy">Copier</button>
+      <button type="button" class="ghost" id="import">Importer ce CSV</button>
+      <span id="backup-msg" class="note-line" style="margin:0"></span>
+    </div>
+  </details>
+  </div>
+  <div id="view-synth" role="tabpanel" aria-labelledby="tab-synth" hidden>
+    <section class="card hero" aria-labelledby="h-range">
+      <h2 id="h-range">Autonomie estimée</h2>
+      <div id="range"></div>
+    </section>
   <section class="card" aria-labelledby="h-synth">
     <h2 id="h-synth">Synthèse</h2>
     <div class="ctl">
@@ -321,26 +387,12 @@
         <button type="button" class="ghost small" data-q="year">Cette année</button>
       </div>
     </div>
+    <div id="charts"></div>
     <div id="synth"></div>
   </section>
 
-  <section class="card" aria-labelledby="h-hist">
-    <h2 id="h-hist">Historique</h2>
-    <div id="hist"></div>
-  </section>
-
-  <details class="card" id="backup">
-    <summary>Sauvegarde et import <span class="hint">CSV</span></summary>
-    <p class="note-line" style="margin-top:0">Les données sont gardées dans ce navigateur, sur cet appareil. Pour les conserver ailleurs ou les changer d'appareil, exporte-les en CSV puis colle-les ici pour les importer.</p>
-    <textarea id="csv" aria-label="Contenu CSV" placeholder="date;tarif;kwh;prix_kwh;note;km;compteur_debut;compteur_fin;batt_avant;batt_apres;session"></textarea>
-    <div class="actions">
-      <button type="button" class="ghost" id="export">Exporter en CSV</button>
-      <button type="button" class="ghost" id="copy">Copier</button>
-      <button type="button" class="ghost" id="import">Importer ce CSV</button>
-      <span id="backup-msg" class="note-line" style="margin:0"></span>
-    </div>
-  </details>
-  <p class="note-line" style="text-align:center">Version 2 · suivi de la batterie</p>
+  </div>
+  <p class="note-line" style="text-align:center">Version 3 · synthèse, graphiques et autonomie</p>
 </main>
 
 <script>
@@ -776,6 +828,7 @@
   }
 
   function renderSynth() {
+    renderExtra();
     var el = $('synth');
     var st = state.settings;
     if (!state.entries.length) {
@@ -1113,10 +1166,185 @@
     bmsg(added + ' ajoutée(s), ' + skipped + ' doublon(s) ignoré(s)' + (bad ? ', ' + bad + ' ligne(s) illisible(s)' : '') + '.');
   });
 
+  /* ---------- Onglets, autonomie, graphiques ---------- */
+  function showTab(n) {
+    ['saisie', 'synth'].forEach(function (k) {
+      $('view-' + k).hidden = k !== n;
+      $('tab-' + k).setAttribute('aria-selected', k === n ? 'true' : 'false');
+    });
+    window.scrollTo(0, 0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tab]'), function (b) {
+    b.addEventListener('click', function () { showTab(b.getAttribute('data-tab')); });
+  });
+
+  var rangePct = 100, rm = null;
+  function pctile(a, p) { var i = (a.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i); return a[lo] + (a[hi] - a[lo]) * (i - lo); }
+
+  function rangeModel() {
+    var cap = battCap();
+    if (!cap) return { err: 'Renseigne la capacité de ta batterie dans « Mes tarifs et batterie » (onglet Saisie).' };
+    var all = sessionsAll(), n = state.settings.rbase === '10' ? 10 : 0;
+    var B = battAgg(all), eff = B.kst > 0 ? Math.min(1, B.st / B.kst) : null;
+    var sd = all.filter(function (s) { return s.drawn > 0 && s.km > 0; });
+    var sk = all.filter(function (s) { return s.km > 0 && s.kwh > 0; });
+    if (n) { sd = sd.slice(-n); sk = sk.slice(-n); }
+    var m = { cap: cap, eff: eff }, smp, a = 0, b = 0;
+    if (sd.length >= 2) {
+      m.method = 'bat'; m.n = sd.length;
+      sd.forEach(function (s) { a += s.drawn; b += s.km; });
+      m.typ = b / a * cap; m.kwh100 = a / b * 100;
+      smp = sd.map(function (s) { return s.km / s.drawn * cap; });
+    } else if (sk.length) {
+      var e = eff || 0.9;
+      m.method = 'wall'; m.n = sk.length; m.assumed = !eff;
+      sk.forEach(function (s) { a += s.kwh; b += s.km; });
+      m.typ = b / a * cap / e; m.kwh100 = a * e / b * 100;
+      smp = sk.map(function (s) { return s.km / s.kwh * cap / e; });
+    } else {
+      return { err: 'Ajoute quelques charges avec leurs kilomètres (et les niveaux de batterie pour plus de précision) : l’estimation apparaîtra ici.' };
+    }
+    smp.sort(function (x, y) { return x - y; });
+    if (smp.length >= 4) { m.lo = pctile(smp, 0.25); m.hi = pctile(smp, 0.75); }
+    else { m.lo = smp[0]; m.hi = smp[smp.length - 1]; }
+    m.lo = Math.min(m.lo, m.typ); m.hi = Math.max(m.hi, m.typ);
+    return m;
+  }
+  function kmR(v) { return nf0.format(Math.round(v)); }
+  function updateRangeOut() {
+    if (!rm || rm.err || !$('r-out')) return;
+    var f = rangePct / 100;
+    $('r-pv').textContent = rangePct + ' %';
+    $('r-out').textContent = '≈ ' + kmR(rm.typ * f) + ' km (entre ' + kmR(rm.lo * f) + ' et ' + kmR(rm.hi * f) + ')';
+  }
+  function renderRange() {
+    var el = $('range');
+    rm = rangeModel();
+    if (rm.err) { el.innerHTML = '<p class="r-empty">' + rm.err + '</p>'; return; }
+    var mx = rm.hi * 1.1, pos = function (v) { return (v / mx * 100).toFixed(1) + '%'; };
+    var basis = rm.method === 'bat'
+      ? 'Calcul sur ' + rm.n + ' trajets avec niveaux de batterie : ' + nf1.format(rm.kwh100) + ' kWh/100 km côté batterie, pour ' + nfFlex.format(rm.cap) + ' kWh utiles.'
+      : 'Calcul sur ' + rm.n + ' charge' + (rm.n > 1 ? 's' : '') + ' avec kilomètres, rendement de charge ' + (rm.assumed ? 'supposé à 90 % (renseigne les niveaux de batterie pour l’affiner)' : nf1.format(rm.eff * 100) + ' %') + '.';
+    var h = '<div class="r-v">' + kmR(rm.typ) + ' <small>km, batterie pleine</small></div>'
+      + '<p class="r-sub">Plutôt entre <b>' + kmR(rm.lo) + '</b> et <b>' + kmR(rm.hi) + '</b> km selon la conduite.</p>'
+      + '<div class="gauge" role="img" aria-label="Fourchette d’autonomie"><i class="band" style="left:' + pos(rm.lo) + ';width:' + ((rm.hi - rm.lo) / mx * 100).toFixed(1) + '%"></i><i class="mark" style="left:' + pos(rm.typ) + '"></i></div>'
+      + '<div class="gl2"><span>0 km</span><span>' + kmR(mx) + ' km</span></div>'
+      + '<div class="r-tiles">';
+    [100, 80, 50, 20].forEach(function (p) { h += '<div><b>' + kmR(rm.typ * p / 100) + '</b><span>km à ' + p + ' %</span></div>'; });
+    h += '</div><label for="r-pct">Je pars avec <b id="r-pv"></b> de batterie</label>'
+      + '<input type="range" id="r-pct" min="5" max="100" step="5" value="' + rangePct + '">'
+      + '<div class="r-out" id="r-out" aria-live="polite"></div>'
+      + '<label for="r-base">Calculer à partir de</label>'
+      + '<select id="r-base"><option value="all">Toutes les charges</option><option value="10">Les 10 dernières charges</option></select>'
+      + '<p class="r-basis">' + basis + ' Estimation indicative : vitesse, météo et chauffage la font varier.</p>';
+    el.innerHTML = h;
+    $('r-base').value = state.settings.rbase === '10' ? '10' : 'all';
+    $('r-base').addEventListener('change', function () { state.settings.rbase = $('r-base').value; save(); renderRange(); });
+    $('r-pct').addEventListener('input', function () { rangePct = +$('r-pct').value; updateRangeOut(); });
+    updateRangeOut();
+  }
+
+  function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(v || 1))), f = v / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p; }
+  function shortLbl(key) {
+    var g = state.settings.gran;
+    if (g === 'year') return key;
+    if (g === 'quarter') { var p = key.split('-T'); return 'T' + p[1] + ' ' + p[0].slice(2); }
+    var q = key.split('-');
+    return new Date(+q[0], +q[1] - 1, 1).toLocaleDateString('fr-FR', { month: 'short' }).replace('.', '') + ' ' + q[0].slice(2);
+  }
+  function bars(items, label) {
+    var W = 640, H = 250, l = 44, r = 8, t = 24, b = 30, iw = W - l - r, ih = H - t - b, mx = 0;
+    items.forEach(function (i) { i.tot = i.segs.reduce(function (a, s) { return a + s.v; }, 0); if (i.tot > mx) mx = i.tot; });
+    mx = niceMax(mx || 1);
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '">';
+    for (var g = 0; g <= 4; g++) {
+      var y = t + ih - ih * g / 4;
+      s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y + '" y2="' + y + '" class="gl"/><text x="' + (l - 6) + '" y="' + (y + 4) + '" class="ax" text-anchor="end">' + nfFlex.format(mx * g / 4) + '</text>';
+    }
+    var bw = iw / items.length, w = Math.min(48, bw * 0.64);
+    items.forEach(function (it, i) {
+      var x = l + bw * i + (bw - w) / 2, y0 = t + ih;
+      it.segs.forEach(function (sg) {
+        if (sg.v <= 0) return;
+        var h = sg.v / mx * ih; y0 -= h;
+        s += '<rect x="' + x.toFixed(1) + '" y="' + y0.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="2" style="fill:' + sg.c + '"><title>' + it.label + ' · ' + sg.n + ' : ' + nf1.format(sg.v) + '</title></rect>';
+      });
+      s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (y0 - 6).toFixed(1) + '" class="tp" text-anchor="middle">' + it.top + '</text>'
+        + '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - 8) + '" class="ax" text-anchor="middle">' + it.label + '</text>';
+    });
+    return s + '</svg>';
+  }
+  function lineChart(pts, avg, label) {
+    var W = 640, H = 250, l = 44, r = 14, t = 16, b = 30, iw = W - l - r, ih = H - t - b;
+    var vs = pts.map(function (p) { return p.v; }), mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs);
+    if (mx - mn < 1e-9) { mn -= 1; mx += 1; }
+    var pad = (mx - mn) * 0.2; mn -= pad; mx += pad;
+    var t0 = pts[0].t, span = (pts[pts.length - 1].t - t0) || 1;
+    var X = function (p) { return l + (p.t - t0) / span * iw; }, Y = function (v) { return t + ih - (v - mn) / (mx - mn) * ih; };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '">';
+    for (var g = 0; g <= 4; g++) {
+      var v = mn + (mx - mn) * g / 4, y = Y(v);
+      s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y + '" y2="' + y + '" class="gl"/><text x="' + (l - 6) + '" y="' + (y + 4) + '" class="ax" text-anchor="end">' + consText(v) + '</text>';
+    }
+    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + X(p).toFixed(1) + ' ' + Y(p.v).toFixed(1); }).join(' ');
+    s += '<path d="' + line + ' L' + X(pts[pts.length - 1]).toFixed(1) + ' ' + (t + ih) + ' L' + X(pts[0]).toFixed(1) + ' ' + (t + ih) + ' Z" style="fill:var(--hc);opacity:.12"/>'
+      + '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + Y(avg) + '" y2="' + Y(avg) + '" style="stroke:var(--hp);stroke-width:2;stroke-dasharray:6 5"/>'
+      + '<text x="' + (W - r) + '" y="' + (Y(avg) - 6) + '" class="ax" text-anchor="end" style="fill:var(--hp)">moyenne ' + consText(avg) + '</text>'
+      + '<path d="' + line + '" style="fill:none;stroke:var(--hc);stroke-width:2.5;stroke-linejoin:round"/>';
+    pts.forEach(function (p) { s += '<circle cx="' + X(p).toFixed(1) + '" cy="' + Y(p.v).toFixed(1) + '" r="4.5" style="fill:var(--surface);stroke:var(--hc);stroke-width:2.5"><title>' + fmtDate(p.d) + ' : ' + consText(p.v) + ' ' + consUnit() + '</title></circle>'; });
+    s += '<text x="' + l + '" y="' + (H - 8) + '" class="ax">' + fmtDate(pts[0].d) + '</text><text x="' + (W - r) + '" y="' + (H - 8) + '" class="ax" text-anchor="end">' + fmtDate(pts[pts.length - 1].d) + '</text>';
+    return s + '</svg>';
+  }
+  function donut(T) {
+    var R = 42, C = 2 * Math.PI * R, off = 0;
+    var s = '<svg viewBox="0 0 120 120" class="donut" role="img" aria-label="Répartition des kWh par tarif"><g transform="rotate(-90 60 60)">';
+    ORDER.forEach(function (t) {
+      if (T[t] > 0) { var d = T[t] / T.k * C; s += '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke-width="16" style="stroke:' + COLORS[t] + '" stroke-dasharray="' + d.toFixed(2) + ' ' + (C - d).toFixed(2) + '" stroke-dashoffset="' + (-off).toFixed(2) + '"/>'; off += d; }
+    });
+    return s + '</g><text x="60" y="60" text-anchor="middle" class="dv">' + nf0.format(T.k) + '</text><text x="60" y="76" text-anchor="middle" class="dk">kWh</text></svg>';
+  }
+  function chartBox(title, cap, body) { return '<div class="chart"><h3>' + title + '</h3><p class="cap">' + cap + '</p>' + body + '</div>'; }
+
+  function renderCharts() {
+    var el = $('charts'), st = state.settings;
+    function inr(d) { return (!st.from || d >= st.from) && (!st.to || d <= st.to); }
+    var list = state.entries.filter(function (e) { return inr(e.date); });
+    if (!list.length) { el.innerHTML = ''; return; }
+    var gr = {};
+    list.forEach(function (e) { var k = periodKey(e.date); (gr[k] = gr[k] || []).push(e); });
+    var keys = Object.keys(gr).sort().slice(-12);
+    var gname = st.gran === 'year' ? 'année' : st.gran === 'quarter' ? 'trimestre' : 'mois';
+    var h = '';
+    var i1 = keys.map(function (k) {
+      var g = agg(gr[k]);
+      return { label: shortLbl(k), top: g.pk > 0 ? nf0.format(g.c) + ' €' : '', segs: [{ v: g.hc, c: 'var(--hc)', n: 'Heures creuses (kWh)' }, { v: g.hp, c: 'var(--hp)', n: 'Heures pleines (kWh)' }, { v: g.base, c: 'var(--base)', n: 'Base (kWh)' }] };
+    });
+    h += chartBox('Énergie et coût par ' + gname, 'kWh par tarif, coût de la période au-dessus de chaque barre.', bars(i1, 'Énergie et coût par période'));
+    var i2 = keys.filter(function (k) { return agg(gr[k]).km > 0; }).map(function (k) {
+      var g = agg(gr[k]);
+      return { label: shortLbl(k), top: nfFlex.format(g.km), segs: [{ v: g.km, c: 'var(--base)', n: 'km' }] };
+    });
+    if (i2.length) h += chartBox('Kilomètres par ' + gname, 'Distance parcourue sur les charges avec kilomètres.', bars(i2, 'Kilomètres par période'));
+    var ps = sessionsAll().filter(function (s) { return inr(s.date) && s.km > 0 && s.kwh > 0; }).map(function (s) { return { t: new Date(s.date + 'T12:00:00').getTime(), d: s.date, v: consVal(s.kwh, s.km), k: s.kwh, km: s.km }; });
+    if (ps.length >= 2) {
+      var ak = 0, am = 0; ps.forEach(function (p) { ak += p.k; am += p.km; });
+      h += chartBox('Consommation de chaque charge', consUnit() + ', charge par charge (mesurée à la prise).', lineChart(ps, consVal(ak, am), 'Consommation par charge'));
+    }
+    var T = agg(list), rows = '';
+    ORDER.forEach(function (t) {
+      var b = agg(list.filter(function (e) { return e.type === t; }));
+      if (b.k > 0) rows += '<tr><td><span class="dot" style="background:' + COLORS[t] + '"></span>' + TYPES[t] + '</td><td>' + nf0.format(b.k / T.k * 100) + ' %</td><td>' + (b.pk > 0 ? money(b.c) : '—') + '</td></tr>';
+    });
+    h += chartBox('Répartition par tarif', 'Part des kWh et coût.', '<div class="donut-row">' + donut(T) + '<table><thead><tr><th>Tarif</th><th>Part</th><th>Coût</th></tr></thead><tbody>' + rows + '</tbody></table></div>');
+    el.innerHTML = h;
+  }
+  function renderExtra() { renderRange(); renderCharts(); }
+
   updatePreview();
   render();
 })();
 </script>
+
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function () {
