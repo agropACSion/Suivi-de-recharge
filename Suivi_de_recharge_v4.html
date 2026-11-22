@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Suivi de recharge</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Recharge">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#16222B">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAADrUlEQVR4nO3dwXHbQBBE0ZGDUAC6KgKH4xgch2NwOE7LB7gkmmQvdhcQuTP9XwQ4/GoMWUXp5fXtPYB7vj37AbAu4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTgmff/969mP8OWIY4ZDGUEcaCCOYdts/Pnx89kP8uWIY4zJC2VDHJCIY4DVbARx9HMrI4hjjsM1GsTRyXA2gjh6eJYRxLHLtowgDjQQR8vd2TC5RoM4GpxfKBvigEQc9zEbQRx3UcaGOCARx7X2bPh8VAniuMIL5RJxQCKOT8zGFeL4hzJuEccAq2s0iGPDbNxFHJQhEQck9ziYjQbrOIbKcLtGwzkONmOXbxzYZRoHs9HDMQ7K6OQYxwTDazQM42A2+nnFQRlDvOLAEKM4mI1RLnEcKcPzGg2fODDBIg5eKHPqx0EZ0+rHgWnF42A2jqgcxyll2H5Uidpx4KCycfBCOa5mHJRxioJxUMZZCsZxIudrNOrFwWyc6OX17f3Zz3CapGUsu0/VliOdZcuISnEknY2VFYkjaRkrz0aUiSOjxcuIGnEknY31pY8jaRnrz0YUiCOjFGVE9jiSzkYWieNIWkaW2YjUcWSUqIzIG0fS2cglZRxJy8g1G5E0jozSlREZ40g6GxkliyNpGRlnI3LFQRkPlikOPFiaOJiNx8sRB2U8RY44MspeRqSII+lsFLB6HEnLKDAbsX4cGdUoIxaPI+lslFHqR01zzk2wzGzE4suRTqUygjh4czW4x3GiYrMRxHGWemUEcaCBOE5QcjbCPA7+FmWbdRxoI45DCs9GEMcRtcsI5zj4+muXbxwHlZ+NII45DmUEcaCBOIaZzEbYxjF9jfqUEbZxoAdxDLCajSCOfm5lBHGgwTGOiWvUcDbCM45RnmUEcaCBOHbYzkYYxjF0cDiXEYZxoB9xSOazEcShUEYQBxq84ui8RpmNjVccPSjjA3FAIo7/MBuXiOMTZVwxiqN9jVLGLaM4MIo4IpgNgTgoQ3KJg1/GTnCJQ2E2GqzjoIw26zjQ5hsHs7HLIo7ba5QyeljEgTmOcTAbnezioIx+dnGgX/04Lq9RZmNI/Tg+UMYoozgwyiUOZmNC8Ti2g4My5hSPA0fUj4PZmMb/lYVUfzkwjTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIAxJxQCIOSMQBiTggEQck4oBEHJCIA9JfcpzHVp6z2a0AAAAASUVORK5CYII=">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #EDF1F0;
+    --surface: #FFFFFF;
+    --ink: #16222B;
+    --muted: #5D6B74;
+    --line: #D5DDDB;
+    --hc: #1B7F79;
+    --hp: #B8741A;
+    --base: #4F6199; --borne: #8C4E9B;
+    --danger: #B3402F;
+    --focus: #1B7F79;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #11181C;
+      --surface: #1A2328;
+      --ink: #E7EEEC;
+      --muted: #93A3A9;
+      --line: #2B373D;
+      --hc: #4FC1B8;
+      --hp: #E4A24C;
+      --base: #8FA2DA; --borne: #D39AE6;
+      --danger: #E27867;
+      --focus: #4FC1B8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #11181C;
+    --surface: #1A2328;
+    --ink: #E7EEEC;
+    --muted: #93A3A9;
+    --line: #2B373D;
+    --hc: #4FC1B8;
+    --hp: #E4A24C;
+    --base: #8FA2DA; --borne: #D39AE6;
+    --danger: #E27867;
+    --focus: #4FC1B8;
+  }
+  html { scroll-padding-top: env(safe-area-inset-top, 0px); background: var(--bg); }
+  *, *::before, *::after { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Figtree", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-variant-numeric: tabular-nums;
+  }
+  main { max-width: 860px; margin: 0 auto; padding: 20px 16px 48px; }
+  h1 { font-size: 1.75rem; line-height: 1.15; margin: 8px 0 4px; letter-spacing: -0.01em; }
+  h2 { font-size: 1.15rem; margin: 0 0 12px; }
+  .lede { color: var(--muted); margin: 0 0 20px; }
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  details.card > summary { cursor: pointer; font-weight: 600; list-style-position: inside; }
+  details.card > summary .hint { font-weight: 400; color: var(--muted); margin-left: 8px; }
+  details.card[open] > summary { margin-bottom: 12px; }
+
+  label, .label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; }
+  input[type="text"], input[type="date"], select, textarea {
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    min-height: 44px;
+  }
+  input.auto { border: 1.5px dashed var(--hc); }
+  textarea { min-height: 120px; font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 0.85rem; }
+  input:focus-visible, select:focus-visible, textarea:focus-visible, button:focus-visible, .seg input:focus-visible + span {
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+  .grid { display: grid; gap: 12px; }
+  .grid.three { grid-template-columns: repeat(3, 1fr); }
+  .grid.two { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 560px) {
+    .grid.three, .grid.two { grid-template-columns: 1fr; }
+    .grid.km { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+  }
+  .grid.km { grid-template-columns: repeat(3, 1fr); }
+  .kwh-input { font-size: 1.6rem; font-weight: 700; padding: 10px 14px; }
+  .unit { color: var(--muted); font-size: 0.85rem; font-weight: 400; }
+  fieldset { border: 1px solid var(--line); border-radius: 8px; padding: 12px; margin: 16px 0 0; }
+  legend { font-size: 0.9rem; font-weight: 600; padding: 0 6px; }
+
+  .seg { display: flex; gap: 8px; flex-wrap: wrap; }
+  .seg label { margin: 0; flex: 1 1 120px; cursor: pointer; }
+  .seg input { position: absolute; opacity: 0; pointer-events: none; }
+  .seg span {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-height: 44px;
+    border: 1.5px solid var(--line);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-weight: 600;
+    background: var(--bg);
+  }
+  .seg span::before { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--dot); }
+  .seg input:checked + span { border-color: var(--dot); box-shadow: inset 0 0 0 1px var(--dot); }
+  .seg .t-hc { --dot: var(--hc); }
+  .seg .t-base { --dot: var(--base); }
+  .seg .t-borne { --dot: var(--borne); }
+
+  button {
+    font: inherit; font-weight: 600; cursor: pointer;
+    min-height: 44px; padding: 8px 16px;
+    border-radius: 8px; border: 1.5px solid var(--ink);
+    background: var(--ink); color: var(--bg);
+  }
+  button.ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+  button.small { min-height: 34px; padding: 4px 10px; font-size: 0.85rem; }
+  button.danger { color: var(--danger); border-color: var(--danger); background: transparent; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 12px; }
+  #status { min-height: 1.4em; color: var(--hc); font-weight: 600; font-size: 0.9rem; }
+  .warn { color: var(--danger); font-size: 0.9rem; margin: 8px 0 0; }
+
+  .totals { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-bottom: 14px; }
+  .total .v { font-size: 1.7rem; font-weight: 700; line-height: 1.1; }
+  .total .k { color: var(--muted); font-size: 0.85rem; }
+  .share { display: flex; height: 12px; border-radius: 6px; overflow: hidden; background: var(--line); margin: 4px 0 8px; }
+  .share i { display: block; height: 100%; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.85rem; color: var(--muted); margin-bottom: 4px; }
+  .legend b { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .note-line { color: var(--muted); font-size: 0.9rem; margin: 10px 0 0; }
+
+  .ctl { padding-bottom: 14px; margin-bottom: 14px; border-bottom: 1px solid var(--line); }
+  .quick { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+
+  .scroll { overflow-x: auto; max-width: 100%; }
+  table { border-collapse: collapse; width: 100%; font-size: 0.92rem; }
+  th, td { padding: 8px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  th { font-weight: 600; color: var(--muted); font-size: 0.85rem; }
+  tfoot td { font-weight: 700; border-top: 2px solid var(--ink); border-bottom: none; }
+  .dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 6px; }
+  .empty { color: var(--muted); padding: 8px 0; }
+  .sub { margin-top: 18px; }
+  .sub h3 { font-size: 0.95rem; margin: 0 0 6px; }
+
+  .hrow { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
+  .hrow:last-child { border-bottom: none; }
+  .hrow .top { font-weight: 600; }
+  .hrow .meta { color: var(--muted); font-size: 0.9rem; grid-column: 1; }
+  .hrow .meta b { color: var(--ink); font-weight: 600; }
+  .hrow .acts { grid-column: 2; grid-row: 1 / span 2; display: flex; flex-direction: column; gap: 6px; }
+  .hrow .acts button { min-width: 96px; }
+  .hrow.editing { display: block; }
+  [hidden] { display: none !important; }
+  .tabs { display: flex; gap: 4px; padding: 4px; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; margin: 0 0 16px; }
+  .tabs button { flex: 1; background: transparent; color: var(--muted); border: 0; border-radius: 9px; }
+  .tabs button[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+  .hero { background: linear-gradient(135deg, #0E3F44 0%, #1B7F79 100%); color: #fff; border: 0; padding: 22px 18px; }
+  .hero h2 { color: rgba(255,255,255,.88); font-size: 1rem; font-weight: 600; margin: 0; }
+  .hero .r-v { font-size: 3.6rem; font-weight: 700; line-height: 1.05; letter-spacing: -0.02em; margin: 4px 0; }
+  .hero .r-v small { font-size: 1.2rem; font-weight: 500; opacity: .85; }
+  .hero .r-sub, .hero .r-basis { color: rgba(255,255,255,.88); font-size: .92rem; margin: 0; }
+  .gauge { position: relative; height: 14px; border-radius: 7px; background: rgba(255,255,255,.18); margin: 18px 0 4px; }
+  .gauge .band { position: absolute; top: 0; bottom: 0; border-radius: 7px; background: rgba(255,255,255,.45); }
+  .gauge .mark { position: absolute; top: -4px; width: 6px; height: 22px; margin-left: -3px; border-radius: 3px; background: #fff; }
+  .gl2 { display: flex; justify-content: space-between; font-size: .8rem; color: rgba(255,255,255,.8); }
+  .r-tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 18px 0 14px; }
+  .r-tiles div { background: rgba(255,255,255,.12); border-radius: 10px; padding: 10px 6px; text-align: center; }
+  .r-tiles b { display: block; font-size: 1.25rem; line-height: 1.2; }
+  .r-tiles span { font-size: .8rem; color: rgba(255,255,255,.85); }
+  .hero label { color: #fff; }
+  .hero input[type=range] { width: 100%; accent-color: #fff; min-height: 32px; }
+  .hero select { background: rgba(255,255,255,.14); color: #fff; border-color: rgba(255,255,255,.4); min-height: 38px; margin-top: 6px; }
+  .hero select option { color: #16222B; }
+  .hero .r-out { font-size: 1.1rem; font-weight: 600; margin: 2px 0 14px; }
+  .hero .r-basis { margin-top: 10px; }
+  .r-empty { margin: 8px 0; }
+  .chart { margin-top: 20px; }
+  .chart h3 { font-size: 1rem; margin: 0 0 2px; }
+  .chart .cap { color: var(--muted); font-size: .85rem; margin: 0 0 6px; }
+  .chart svg { width: 100%; height: auto; display: block; }
+  .chart .ax { fill: var(--muted); font-size: 13px; }
+  .chart .gl { stroke: var(--line); stroke-width: 1; }
+  .chart .tp { fill: var(--ink); font-size: 13px; font-weight: 600; }
+  .donut-row { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .donut { width: 150px; height: 150px; flex: none; }
+  .donut .dv { fill: var(--ink); font-size: 20px; font-weight: 700; }
+  .donut .dk { fill: var(--muted); font-size: 11px; }
+  .donut-row table { flex: 1; min-width: 220px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Suivi de recharge</h1>
+  <p class="lede">Note les kWh, les kilomètres et le niveau de batterie de chaque charge : coût, consommation et rendement de charge se calculent tout seuls.</p>
+
+  <nav class="tabs" role="tablist" aria-label="Sections">
+    <button type="button" role="tab" id="tab-saisie" data-tab="saisie" aria-selected="true">Saisie</button>
+    <button type="button" role="tab" id="tab-synth" data-tab="synth" aria-selected="false">Synthèse</button>
+  </nav>
+  <div id="view-saisie" role="tabpanel" aria-labelledby="tab-saisie">
+  <section class="card" id="bk-card" aria-labelledby="h-bk">
+    <h2 id="h-bk">Mes données</h2>
+    <p id="bk-status" class="note-line"></p>
+    <div class="actions">
+      <button type="button" id="xl-export">Exporter en Excel</button>
+      <button type="button" class="ghost" id="xl-pick">Importer un Excel</button>
+      <input type="file" id="xl-file" accept=".xlsx,.xlsm,.xls" hidden>
+    </div>
+    <p id="xl-msg" class="note-line" role="status" aria-live="polite"></p>
+    <div class="actions" id="xl-actions" hidden>
+      <button type="button" id="xl-add">Ajouter aux données existantes</button>
+      <button type="button" class="ghost" id="xl-rep">Remplacer tout l’historique</button>
+      <button type="button" class="ghost small" id="xl-cancel">Annuler</button>
+    </div>
+  </section>
+
+  <details class="card" id="tarifs">
+    <summary>Mes tarifs et batterie <span class="hint" id="tarifs-hint"></span></summary>
+    <div class="grid three">
+      <div>
+        <label for="p-base">Base <span class="unit">€/kWh</span></label>
+        <input type="text" id="p-base" inputmode="decimal" placeholder="ex. 0,2000" autocomplete="off">
+      </div>
+      <div>
+        <label for="p-hp">Heures pleines <span class="unit">€/kWh</span></label>
+        <input type="text" id="p-hp" inputmode="decimal" placeholder="ex. 0,2100" autocomplete="off">
+      </div>
+      <div>
+        <label for="p-hc">Heures creuses <span class="unit">€/kWh</span></label>
+        <input type="text" id="p-hc" inputmode="decimal" placeholder="ex. 0,1700" autocomplete="off">
+      </div>
+    </div>
+    <div style="margin-top:12px;max-width:260px">
+      <label for="p-batt">Batterie <span class="unit">kWh utiles</span></label>
+      <input type="text" id="p-batt" inputmode="decimal" placeholder="ex. 79" autocomplete="off">
+    </div>
+    <p class="note-line">Chaque charge garde le tarif en vigueur le jour où tu l'ajoutes : changer un tarif ici ne modifie pas l'historique.</p>
+    <div class="actions">
+      <button type="button" class="ghost small" id="recalc">Recalculer tout l'historique avec ces tarifs</button>
+      <span id="recalc-msg" class="note-line" style="margin:0"></span>
+    </div>
+  </details>
+
+  <section class="card" aria-labelledby="h-saisie">
+    <h2 id="h-saisie">Ajouter une charge</h2>
+    <div class="grid two">
+      <div>
+        <label for="f-date">Date</label>
+        <input type="date" id="f-date">
+      </div>
+      <div>
+        <label for="f-kwh">Énergie <span class="unit">kWh</span></label>
+        <input type="text" id="f-kwh" class="kwh-input" inputmode="decimal" placeholder="0,0" autocomplete="off">
+      </div>
+    </div>
+    <div style="margin-top:12px">
+      <span class="label" id="l-type">Tarif</span>
+      <div class="seg" role="radiogroup" aria-labelledby="l-type">
+        <label class="t-hc"><input type="radio" name="type" value="hchp" checked><span>Heures creuses / pleines</span></label>
+        <label class="t-base"><input type="radio" name="type" value="base"><span>Base</span></label>
+        <label class="t-borne"><input type="radio" name="type" value="borne"><span>Borne / autre</span></label>
+      </div>
+    </div>
+    <div style="margin-top:12px" id="pct-wrap">
+      <label for="f-pct">Part en heures creuses <span class="unit">%</span></label>
+      <input type="text" id="f-pct" inputmode="decimal" value="100" autocomplete="off">
+      <p class="note-line" id="split-preview" style="margin-top:6px"></p>
+    </div>
+    <div style="margin-top:12px" id="borne-wrap" hidden>
+      <div class="grid two">
+        <div><label for="f-bprice">Prix <span class="unit">€/kWh</span></label><input type="text" id="f-bprice" inputmode="decimal" placeholder="ex. 0,39" autocomplete="off"></div>
+        <div><label for="f-btotal">ou montant payé <span class="unit">€</span></label><input type="text" id="f-btotal" inputmode="decimal" placeholder="ex. 8,43" autocomplete="off"></div>
+      </div>
+      <p class="note-line" id="borne-preview" style="margin-top:6px"></p>
+    </div>
+
+    <fieldset>
+      <legend>Kilomètres (facultatif)</legend>
+      <div class="grid km">
+        <div>
+          <label for="f-odo0">Compteur début</label>
+          <input type="text" id="f-odo0" inputmode="decimal" placeholder="km" autocomplete="off">
+        </div>
+        <div>
+          <label for="f-odo1">Compteur fin</label>
+          <input type="text" id="f-odo1" inputmode="decimal" placeholder="km" autocomplete="off">
+        </div>
+        <div>
+          <label for="f-km">Parcourus</label>
+          <input type="text" id="f-km" inputmode="decimal" placeholder="km" autocomplete="off">
+        </div>
+      </div>
+      <p class="note-line">Renseigne deux champs sur trois : le troisième se calcule (champ en pointillés). Tu peux aussi ne saisir que les kilomètres parcourus.</p>
+      <p class="note-line" id="odo-hint"></p>
+      <p class="note-line" id="cons-preview"></p>
+      <p class="warn" id="km-msg" role="alert"></p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Batterie (facultatif)</legend>
+      <div class="grid two">
+        <div>
+          <label for="f-b0">Niveau avant la charge <span class="unit">%</span></label>
+          <input type="text" id="f-b0" inputmode="decimal" placeholder="%" autocomplete="off">
+        </div>
+        <div>
+          <label for="f-b1">Niveau après la charge <span class="unit">%</span></label>
+          <input type="text" id="f-b1" inputmode="decimal" placeholder="%" autocomplete="off">
+        </div>
+      </div>
+      <p class="note-line" id="batt-hint"></p>
+      <p class="note-line" id="batt-preview"></p>
+    </fieldset>
+
+    <div style="margin-top:12px">
+      <label for="f-note">Note <span class="unit">(facultatif)</span></label>
+      <input type="text" id="f-note" placeholder="ex. trajet Le Mans" autocomplete="off">
+    </div>
+    <div class="actions">
+      <button type="button" id="add">Ajouter la charge</button>
+      <span id="status" role="status" aria-live="polite"></span>
+    </div>
+    <p class="note-line">Par défaut, 100 % de la charge est comptée en heures creuses. Si elle déborde sur les heures pleines, baisse le pourcentage : le reste est compté en heures pleines, et les kilomètres sont répartis au prorata des kWh.</p>
+    <p class="warn" id="form-error" role="alert"></p>
+  </section>
+
+
+  <section class="card" aria-labelledby="h-hist">
+    <h2 id="h-hist">Historique</h2>
+    <div id="hist"></div>
+  </section>
+
+  <details class="card" id="backup">
+    <summary>Sauvegarde et import <span class="hint">CSV</span></summary>
+    <p class="note-line" style="margin-top:0">Les données sont gardées dans ce navigateur, sur cet appareil. Pour les conserver ailleurs ou les changer d'appareil, exporte-les en CSV puis colle-les ici pour les importer.</p>
+    <textarea id="csv" aria-label="Contenu CSV" placeholder="date;tarif;kwh;prix_kwh;note;km;compteur_debut;compteur_fin;batt_avant;batt_apres;session"></textarea>
+    <div class="actions">
+      <button type="button" class="ghost" id="export">Exporter en CSV</button>
+      <button type="button" class="ghost" id="copy">Copier</button>
+      <button type="button" class="ghost" id="import">Importer ce CSV</button>
+      <span id="backup-msg" class="note-line" style="margin:0"></span>
+    </div>
+  </details>
+  </div>
+  <div id="view-synth" role="tabpanel" aria-labelledby="tab-synth" hidden>
+    <section class="card hero" aria-labelledby="h-range">
+      <h2 id="h-range">Autonomie estimée</h2>
+      <div id="range"></div>
+    </section>
+  <section class="card" aria-labelledby="h-synth">
+    <h2 id="h-synth">Synthèse</h2>
+    <div class="ctl">
+      <div class="grid two">
+        <div>
+          <label for="s-from">Du</label>
+          <input type="date" id="s-from">
+        </div>
+        <div>
+          <label for="s-to">Au</label>
+          <input type="date" id="s-to">
+        </div>
+      </div>
+      <div class="grid two" style="margin-top:12px">
+        <div>
+          <label for="s-gran">Regrouper par</label>
+          <select id="s-gran">
+            <option value="month">Mois</option>
+            <option value="quarter">Trimestre</option>
+            <option value="year">Année</option>
+          </select>
+        </div>
+        <div>
+          <label for="s-fmt">Consommation en</label>
+          <select id="s-fmt">
+            <option value="kwh100">kWh / 100 km</option>
+            <option value="kmkwh">km / kWh</option>
+            <option value="whkm">Wh / km</option>
+          </select>
+        </div>
+      </div>
+      <div class="quick">
+        <button type="button" class="ghost small" data-q="all">Tout</button>
+        <button type="button" class="ghost small" data-q="month">Ce mois</button>
+        <button type="button" class="ghost small" data-q="30">30 derniers jours</button>
+        <button type="button" class="ghost small" data-q="year">Cette année</button>
+      </div>
+    </div>
+    <div id="charts"></div>
+    <div id="synth"></div>
+  </section>
+
+  </div>
+  <p class="note-line" style="text-align:center">Version 4 · bornes, import et export Excel</p>
+</main>
+
+<script>
+(function () {
+  var KEY = 'suivi-recharge-v1';
+  var TYPES = { hc: 'Heures creuses', hp: 'Heures pleines', base: 'Base', borne: 'Borne / autre' };
+  var ORDER = ['hc', 'hp', 'base', 'borne'];
+  var COLORS = { hc: 'var(--hc)', hp: 'var(--hp)', base: 'var(--base)', borne: 'var(--borne)' };
+  var memCopy = null;
+
+  function emptyState() {
+    return {
+      tariffs: { base: '0,2001', hp: '0,2237', hc: '0,1449' },
+      battery: '79',
+      entries: [],
+      settings: { fmt: 'kwh100', gran: 'month', from: '', to: '' }
+    };
+  }
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var s = JSON.parse(raw);
+        if (s && Array.isArray(s.entries) && s.tariffs) {
+          s.settings = Object.assign(emptyState().settings, s.settings || {});
+          if (s.battery == null) s.battery = '79';
+          return s;
+        }
+      }
+    } catch (e) {}
+    return memCopy || emptyState();
+  }
+  var state = load();
+
+  function save() {
+    memCopy = state;
+    try { localStorage.setItem(KEY, JSON.stringify(state)); }
+    catch (e) { flash('Enregistrement impossible dans ce navigateur : exporte régulièrement en CSV.', true); }
+  }
+
+  var $ = function (id) { return document.getElementById(id); };
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+  function num(v) {
+    if (v == null) return null;
+    var n = parseFloat(String(v).replace(/\s/g, '').replace(',', '.'));
+    return isFinite(n) ? n : null;
+  }
+  function fmtN(d) { return new Intl.NumberFormat('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d }); }
+  var nf0 = fmtN(0), nf1 = fmtN(1), nf2 = fmtN(2), nf4 = fmtN(4);
+  var nfFlex = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+  var eur = new Intl.NumberFormat('fr-FR', { style: 'currency', currency: 'EUR' });
+  function kwh(n) { return nf2.format(n); }
+  function money(n) { return n == null ? '—' : eur.format(n); }
+  function cost(e) { return e.price == null ? null : e.kwh * e.price; }
+  function r3(n) { return Math.round(n * 1000) / 1000; }
+
+  function ymd(d) {
+    return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  }
+  function today() { return ymd(new Date()); }
+  function fmtDate(iso) { var p = iso.split('-'); return p[2] + '/' + p[1] + '/' + p[0]; }
+  function monthLabel(key) {
+    var p = key.split('-');
+    var s = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' });
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  function periodKey(date) {
+    var g = state.settings.gran;
+    if (g === 'year') return date.slice(0, 4);
+    if (g === 'quarter') return date.slice(0, 4) + '-T' + (Math.floor((+date.slice(5, 7) - 1) / 3) + 1);
+    return date.slice(0, 7);
+  }
+  function periodLabel(key) {
+    var g = state.settings.gran;
+    if (g === 'year') return key;
+    if (g === 'quarter') { var p = key.split('-T'); return 'T' + p[1] + ' ' + p[0]; }
+    return monthLabel(key);
+  }
+
+  var flashTimer;
+  function flash(msg, isError) {
+    var el = isError ? $('form-error') : $('status');
+    el.textContent = msg;
+    clearTimeout(flashTimer);
+    flashTimer = setTimeout(function () { el.textContent = ''; }, 3500);
+  }
+
+  /* ---------- Consommation ---------- */
+  function consVal(kk, km) {
+    if (!(km > 0) || !(kk > 0)) return null;
+    var f = state.settings.fmt;
+    if (f === 'kmkwh') return km / kk;
+    if (f === 'whkm') return kk / km * 1000;
+    return kk / km * 100;
+  }
+  function consText(v) {
+    if (v == null) return '—';
+    var f = state.settings.fmt;
+    return (f === 'kmkwh' ? nf2 : f === 'whkm' ? nf0 : nf1).format(v);
+  }
+  function consUnit() {
+    var f = state.settings.fmt;
+    return f === 'kmkwh' ? 'km/kWh' : f === 'whkm' ? 'Wh/km' : 'kWh/100 km';
+  }
+
+  /* ---------- Tarifs ---------- */
+  function currentPrice(type) { return num(state.tariffs[type]); }
+
+  function renderTariffHint() {
+    var parts = [];
+    ORDER.forEach(function (t) {
+      var p = currentPrice(t);
+      if (p != null) parts.push(TYPES[t] + ' ' + nf4.format(p));
+    });
+    if (battCap()) parts.push('Batterie ' + nfFlex.format(battCap()) + ' kWh');
+    $('tarifs-hint').textContent = parts.length ? parts.join(' · ') : 'à renseigner';
+  }
+
+  ['base', 'hp', 'hc'].forEach(function (t) {
+    var el = $('p-' + t);
+    el.value = state.tariffs[t] || '';
+    el.addEventListener('input', function () {
+      state.tariffs[t] = el.value.trim();
+      save();
+      renderTariffHint();
+    });
+  });
+  $('tarifs').open = ORDER.every(function (t) { return currentPrice(t) == null; });
+  $('p-batt').value = state.battery || '';
+  $('p-batt').addEventListener('input', function () {
+    state.battery = $('p-batt').value.trim();
+    save(); renderTariffHint(); updatePreview(); renderBattHint(); renderSynth(); renderHist();
+  });
+
+  var recalcArmed = false, recalcTimer;
+  $('recalc').addEventListener('click', function () {
+    var btn = $('recalc'), msg = $('recalc-msg');
+    function reset() {
+      clearTimeout(recalcTimer);
+      recalcArmed = false;
+      btn.textContent = "Recalculer tout l'historique avec ces tarifs";
+      btn.classList.remove('danger');
+    }
+    if (!recalcArmed) {
+      recalcArmed = true;
+      btn.textContent = "Confirmer : écraser les prix de tout l'historique";
+      btn.classList.add('danger');
+      recalcTimer = setTimeout(reset, 4000);
+      return;
+    }
+    state.entries.forEach(function (e) { if (e.type !== 'borne') e.price = currentPrice(e.type); });
+    save(); render();
+    msg.textContent = 'Historique recalculé.';
+    reset();
+    setTimeout(function () { msg.textContent = ''; }, 3000);
+  });
+
+  /* ---------- Kilomètres : deux champs sur trois ---------- */
+  var kmIds = { o0: 'f-odo0', o1: 'f-odo1', km: 'f-km' };
+  var kmEdited = [];
+
+  function setAuto(key, value) {
+    var el = $(kmIds[key]);
+    el.value = value;
+    el.classList.add('auto');
+  }
+  function clearAuto() {
+    Object.keys(kmIds).forEach(function (k) { $(kmIds[k]).classList.remove('auto'); });
+  }
+  function fmtInput(n) { return String(Math.round(n * 10) / 10).replace('.', ','); }
+
+  function syncKm(editedKey) {
+    $('km-msg').textContent = '';
+    if (editedKey) {
+      kmEdited = kmEdited.filter(function (x) { return x !== editedKey; });
+      kmEdited.push(editedKey);
+      $(kmIds[editedKey]).classList.remove('auto');
+    }
+    if (kmEdited.length < 2) return;
+    var a = kmEdited[kmEdited.length - 1], b = kmEdited[kmEdited.length - 2];
+    var third = ['o0', 'o1', 'km'].filter(function (x) { return x !== a && x !== b; })[0];
+    var v = { o0: num($('f-odo0').value), o1: num($('f-odo1').value), km: num($('f-km').value) };
+    if (v[a] == null || v[b] == null) return;
+    var r;
+    if (third === 'km') r = v.o1 - v.o0;
+    else if (third === 'o1') r = v.o0 + v.km;
+    else r = v.o1 - v.km;
+    if (third === 'km' && r <= 0) {
+      $('km-msg').textContent = 'Le compteur de fin doit être supérieur au compteur de début.';
+      $(kmIds[third]).value = '';
+      return;
+    }
+    if (third === 'o0' && r < 0) {
+      $('km-msg').textContent = 'Les kilomètres parcourus dépassent le compteur de fin.';
+      $(kmIds[third]).value = '';
+      return;
+    }
+    setAuto(third, fmtInput(r));
+  }
+  Object.keys(kmIds).forEach(function (k) {
+    $(kmIds[k]).addEventListener('input', function () { syncKm(k); updatePreview(); });
+  });
+
+  function lastOdo() {
+    var best = null;
+    state.entries.forEach(function (e) {
+      if (e.odoEnd == null) return;
+      if (!best || e.date > best.date || (e.date === best.date && e.odoEnd > best.odoEnd)) best = e;
+    });
+    return best ? best.odoEnd : null;
+  }
+  function renderOdoHint() {
+    var el = $('odo-hint');
+    var o = lastOdo();
+    if (o == null) { el.innerHTML = ''; return; }
+    el.innerHTML = 'Dernier relevé : <b>' + nfFlex.format(o) + ' km</b> <button type="button" class="ghost small" id="use-odo">Utiliser comme début</button>';
+    $('use-odo').addEventListener('click', function () {
+      $('f-odo0').value = fmtInput(o);
+      syncKm('o0');
+      updatePreview();
+      $('f-odo1').focus();
+    });
+  }
+
+  /* ---------- Batterie ---------- */
+  function battCap() { var c = num(state.battery); return c > 0 ? c : null; }
+  function sessionsAll() {
+    var map = {}, arr = [];
+    state.entries.forEach(function (e, i) {
+      var id = e.sid || e.id, s = map[id];
+      if (!s) { s = map[id] = { id: id, date: e.date, i: i, kwh: 0, km: 0, parts: 0, bb: null, ba: null }; arr.push(s); }
+      s.kwh += e.kwh; s.km += e.km > 0 ? e.km : 0; s.parts++;
+      if (e.bb != null && e.ba != null) { s.bb = e.bb; s.ba = e.ba; }
+    });
+    arr.sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : a.i - b.i; });
+    var cap = battCap(), prev = null;
+    arr.forEach(function (s) {
+      s.stored = null; s.drawn = null;
+      if (cap && s.bb != null && s.ba > s.bb) s.stored = (s.ba - s.bb) * cap / 100;
+      if (cap && prev && prev.ba != null && s.bb != null && s.km > 0 && prev.ba > s.bb) s.drawn = (prev.ba - s.bb) * cap / 100;
+      prev = s;
+    });
+    return arr;
+  }
+  function battAgg(ss) {
+    var r = { st: 0, kst: 0, dr: 0, kmi: 0, n: 0, m: 0 };
+    ss.forEach(function (s) {
+      if (s.stored > 0) { r.st += s.stored; r.kst += s.kwh; r.n++; }
+      if (s.drawn > 0) { r.dr += s.drawn; r.kmi += s.km; r.m++; }
+    });
+    return r;
+  }
+  function effText(b) { return b.kst > 0 ? nf1.format(b.st / b.kst * 100) + ' %' : '—'; }
+  function tot(v, k) { return '<div class="total"><div class="v">' + v + '</div><div class="k">' + k + '</div></div>'; }
+  function renderBattHint() {
+    var l = null;
+    sessionsAll().forEach(function (s) { if (s.ba != null) l = s; });
+    $('batt-hint').innerHTML = l ? 'Niveau après la dernière charge : <b>' + nfFlex.format(l.ba) + ' %</b>. La consommation « batterie » compare ce niveau à celui d’avant la nouvelle charge.' : '';
+  }
+
+  /* ---------- Saisie ---------- */
+  $('f-date').value = today();
+
+  function selectedMode() {
+    var r = document.querySelector('input[name="type"]:checked');
+    return r ? r.value : 'hchp';
+  }
+  function readPct() {
+    var raw = $('f-pct').value.trim();
+    if (raw === '') return 100;
+    var p = num(raw);
+    return (p == null || p < 0 || p > 100) ? null : p;
+  }
+  function updatePreview() {
+    var mode = selectedMode(), isBase = mode !== 'hchp';
+    $('pct-wrap').style.display = isBase ? 'none' : '';
+    $('borne-wrap').hidden = mode !== 'borne';
+    var k = num($('f-kwh').value);
+    if (mode === 'borne') {
+      var bu = borneUnit(k);
+      $('borne-preview').textContent = (bu != null && k > 0) ? 'Soit ' + nf4.format(bu) + ' €/kWh, ' + money(bu * k) + ' au total.' : 'Indique le prix au kWh ou le montant payé.';
+    }
+    if (!isBase) {
+      var p = readPct(), el = $('split-preview');
+      if (p == null) el.textContent = 'Entre un pourcentage entre 0 et 100.';
+      else if (k == null || k <= 0) el.textContent = nfFlex.format(p) + ' % en heures creuses, ' + nfFlex.format(100 - p) + ' % en heures pleines.';
+      else {
+        var hc = r3(k * p / 100), hp = r3(k - hc);
+        el.textContent = kwh(hc) + ' kWh en heures creuses + ' + kwh(hp) + ' kWh en heures pleines.';
+      }
+    }
+    var km = num($('f-km').value);
+    $('cons-preview').textContent = (k > 0 && km > 0)
+      ? 'Consommation de cette charge : ' + consText(consVal(k, km)) + ' ' + consUnit() + '.'
+      : '';
+    var b0 = num($('f-b0').value), b1 = num($('f-b1').value), cap = battCap(), t = [];
+    var ss = sessionsAll(), last = ss.length ? ss[ss.length - 1] : null;
+    if (b0 != null && b1 != null && b1 <= b0) t.push('Le niveau après doit être supérieur au niveau avant.');
+    else if (b0 != null && b1 != null && cap) {
+      var st = (b1 - b0) * cap / 100;
+      t.push(kwh(st) + ' kWh stockés' + (k > 0 ? ' · rendement de charge ' + nf1.format(st / k * 100) + ' %' : '') + '.');
+    }
+    if (cap && last && last.ba != null && b0 != null && last.ba > b0 && km > 0) {
+      var dr = (last.ba - b0) * cap / 100;
+      t.push('Depuis la charge précédente : ' + kwh(dr) + ' kWh tirés de la batterie, soit ' + consText(consVal(dr, km)) + ' ' + consUnit() + ' (batterie).');
+    }
+    $('batt-preview').textContent = t.join(' ');
+  }
+  ['f-kwh', 'f-pct', 'f-b0', 'f-b1', 'f-bprice', 'f-btotal'].forEach(function (id) { $(id).addEventListener('input', updatePreview); });
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="type"]'), function (r) {
+    r.addEventListener('change', updatePreview);
+  });
+
+  function addEntry() {
+    var date = $('f-date').value;
+    var k = num($('f-kwh').value);
+    if (!date) { flash('Choisis une date.', true); return; }
+    if (k == null || k <= 0) { flash('Saisis un nombre de kWh supérieur à 0.', true); $('f-kwh').focus(); return; }
+
+    // kilomètres
+    var o0 = num($('f-odo0').value), o1 = num($('f-odo1').value), km = num($('f-km').value);
+    if (km == null && o0 != null && o1 != null) km = o1 - o0;
+    if (km != null && km <= 0) { flash('Les kilomètres parcourus doivent être supérieurs à 0.', true); return; }
+    if (o0 != null && o1 != null && o1 < o0) { flash('Le compteur de fin est inférieur au compteur de début.', true); return; }
+    if (km != null && o0 != null && o1 == null) o1 = o0 + km;
+    if (km != null && o1 != null && o0 == null) o0 = o1 - km;
+
+    var b0 = num($('f-b0').value), b1 = num($('f-b1').value);
+    if ((b0 == null) !== (b1 == null)) { flash('Renseigne les deux niveaux de batterie, ou aucun.', true); return; }
+    if (b0 != null && (b0 < 0 || b1 > 100 || b1 <= b0)) { flash('Batterie : niveaux entre 0 et 100, avec « après » supérieur à « avant ».', true); return; }
+    var sid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    var note = $('f-note').value.trim();
+    var parts = [];
+    if (selectedMode() === 'borne') {
+      var bu = borneUnit(k);
+      if (bu == null) { flash('Indique le prix au kWh ou le montant payé à la borne.', true); return; }
+      parts.push({ type: 'borne', kwh: k, price: bu });
+    } else if (selectedMode() === 'base') {
+      parts.push({ type: 'base', kwh: k });
+    } else {
+      var pct = readPct();
+      if (pct == null) { flash('Le pourcentage doit être entre 0 et 100.', true); $('f-pct').focus(); return; }
+      var hc = r3(k * pct / 100), hp = r3(k - hc);
+      if (hc > 0) parts.push({ type: 'hc', kwh: hc });
+      if (hp > 0) parts.push({ type: 'hp', kwh: hp });
+    }
+    var missing = false;
+    parts.forEach(function (p) {
+      var price = p.price != null ? p.price : currentPrice(p.type);
+      if (price == null) missing = true;
+      var e = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        date: date, kwh: p.kwh, type: p.type, price: price, note: note, sid: sid
+      };
+      if (b0 != null) { e.bb = b0; e.ba = b1; }
+      if (km != null) {
+        e.km = r3(km * p.kwh / k);
+        e.kmTotal = km;
+        if (o0 != null) e.odoStart = o0;
+        if (o1 != null) e.odoEnd = o1;
+      }
+      state.entries.push(e);
+    });
+    save();
+    $('f-kwh').value = '';
+    $('f-note').value = '';
+    $('f-pct').value = '100';
+    ['f-odo0', 'f-odo1', 'f-km', 'f-b0', 'f-b1', 'f-bprice', 'f-btotal'].forEach(function (id) { $(id).value = ''; });
+    kmEdited = [];
+    clearAuto();
+    $('km-msg').textContent = '';
+    $('form-error').textContent = '';
+    flash(missing ? 'Charge ajoutée, sans coût : renseigne le tarif plus haut.' : 'Charge ajoutée.');
+    updatePreview();
+    render();
+    $('f-kwh').focus();
+  }
+  $('add').addEventListener('click', addEntry);
+  ['f-kwh', 'f-note', 'f-pct'].forEach(function (id) {
+    $(id).addEventListener('keydown', function (e) { if (e.key === 'Enter') addEntry(); });
+  });
+
+  /* ---------- Réglages de la synthèse ---------- */
+  $('s-from').value = state.settings.from;
+  $('s-to').value = state.settings.to;
+  $('s-gran').value = state.settings.gran;
+  $('s-fmt').value = state.settings.fmt;
+  function readSettings() {
+    state.settings.from = $('s-from').value;
+    state.settings.to = $('s-to').value;
+    state.settings.gran = $('s-gran').value;
+    state.settings.fmt = $('s-fmt').value;
+    save();
+    updatePreview();
+    renderSynth();
+    renderHist();
+  }
+  ['s-from', 's-to', 's-gran', 's-fmt'].forEach(function (id) { $(id).addEventListener('change', readSettings); });
+  Array.prototype.forEach.call(document.querySelectorAll('button[data-q]'), function (b) {
+    b.addEventListener('click', function () {
+      var q = b.getAttribute('data-q'), d = new Date(), from = '', to = '';
+      if (q === 'month') from = ymd(new Date(d.getFullYear(), d.getMonth(), 1));
+      else if (q === 'year') from = d.getFullYear() + '-01-01';
+      else if (q === '30') from = ymd(new Date(d.getFullYear(), d.getMonth(), d.getDate() - 30));
+      $('s-from').value = from;
+      $('s-to').value = to;
+      readSettings();
+    });
+  });
+
+  /* ---------- Calculs ---------- */
+  function agg(list) {
+    var r = { k: 0, c: 0, pk: 0, un: 0, km: 0, kk: 0, ck: 0, kmp: 0, hc: 0, hp: 0, base: 0, borne: 0 };
+    list.forEach(function (e) {
+      var c = cost(e);
+      r.k += e.kwh; r[e.type] += e.kwh;
+      if (c == null) r.un++; else { r.c += c; r.pk += e.kwh; }
+      if (e.km > 0) {
+        r.km += e.km; r.kk += e.kwh;
+        if (c != null) { r.ck += c; r.kmp += e.km; }
+      }
+    });
+    return r;
+  }
+  function per100(a) { return a.kmp > 0 ? money(a.ck / a.kmp * 100) : '—'; }
+
+  /* ---------- Rendu ---------- */
+  var pendingDelete = null, pendingTimer;
+
+  function render() {
+    renderTariffHint();
+    renderOdoHint();
+    renderBattHint();
+    updatePreview();
+    renderSynth();
+    renderHist();
+  }
+
+  function renderSynth() {
+    renderExtra();
+    var el = $('synth');
+    var st = state.settings;
+    if (!state.entries.length) {
+      el.innerHTML = "<p class=\"empty\">Aucune charge pour l'instant. Ajoute la première ci-dessus et les tableaux apparaîtront ici.</p>";
+      return;
+    }
+    var list = state.entries.filter(function (e) {
+      return (!st.from || e.date >= st.from) && (!st.to || e.date <= st.to);
+    });
+    if (!list.length) {
+      el.innerHTML = '<p class="empty">Aucune charge sur cette période.</p>';
+      return;
+    }
+    var T = agg(list);
+    var avg = T.pk > 0 ? T.c / T.pk : null;
+    var html = '<div class="totals">'
+      + '<div class="total"><div class="v">' + kwh(T.k) + '</div><div class="k">kWh au total</div></div>'
+      + '<div class="total"><div class="v">' + money(T.pk > 0 ? T.c : null) + '</div><div class="k">coût total</div></div>'
+      + '<div class="total"><div class="v">' + (avg == null ? '—' : nf4.format(avg)) + '</div><div class="k">€/kWh moyen</div></div>';
+    if (T.km > 0) {
+      html += '<div class="total"><div class="v">' + nfFlex.format(T.km) + '</div><div class="k">km parcourus</div></div>'
+        + '<div class="total"><div class="v">' + consText(consVal(T.kk, T.km)) + '</div><div class="k">' + consUnit() + '</div></div>'
+        + '<div class="total"><div class="v">' + per100(T) + '</div><div class="k">coût aux 100 km</div></div>';
+    }
+    html += '</div>';
+    if (T.km > 0) {
+      html += '<p class="note-line" style="margin-top:0">Consommation calculée sur les ' + kwh(T.kk) + ' kWh des charges dont les kilomètres sont renseignés.</p>';
+    } else {
+      html += '<p class="note-line" style="margin-top:0">Ajoute les kilomètres de tes charges pour voir la consommation aux 100 km.</p>';
+    }
+
+    var ss = sessionsAll().filter(function (s) {
+      return (!st.from || s.date >= st.from) && (!st.to || s.date <= st.to);
+    });
+    var B = battAgg(ss);
+    if (B.n || B.m) {
+      html += '<div class="sub" style="margin-top:0"><h3>Batterie</h3><div class="totals">';
+      if (B.n) html += tot(kwh(B.st), 'kWh stockés dans la batterie') + tot(effText(B), 'rendement de charge');
+      if (B.m) html += tot(kwh(B.dr), 'kWh tirés de la batterie') + tot(consText(consVal(B.dr, B.kmi)), consUnit() + ' (batterie)');
+      html += '</div><p class="note-line" style="margin-top:0">Consommation batterie : niveau après la charge précédente moins niveau avant celle-ci, rapporté aux km parcourus entre les deux. Rendement : énergie stockée dans la batterie divisée par l’énergie facturée.</p></div>';
+    }
+    html += '<div class="share" role="img\" aria-label="Répartition des kWh par tarif">';
+    ORDER.forEach(function (t) {
+      if (T[t] > 0) html += '<i style="width:' + (T[t] / T.k * 100) + '%;background:' + COLORS[t] + '"></i>';
+    });
+    html += '</div><div class="legend">';
+    ORDER.forEach(function (t) {
+      if (T[t] > 0) html += '<span><b style="background:' + COLORS[t] + '"></b>' + TYPES[t] + ' ' + Math.round(T[t] / T.k * 100) + ' %</span>';
+    });
+    html += '</div>';
+
+    if (T.un > 0) {
+      html += '<p class="warn">' + T.un + ' charge' + (T.un > 1 ? 's' : '') + " sans tarif : le coût n'est pas compté. Renseigne le tarif plus haut puis utilise « Recalculer ».</p>";
+    }
+    var baseP = currentPrice('base');
+    if (baseP != null && T.un === 0 && (T.hc + T.hp) > 0) {
+      var Bo = agg(list.filter(function (e) { return e.type === 'borne'; })), hk = T.k - T.borne, diff = (T.c - Bo.c) - hk * baseP;
+      var txt = Math.abs(diff) < 0.005 ? 'identique' : (diff < 0 ? money(-diff) + " d'économie" : money(diff) + ' de plus');
+      html += '<p class="note-line">Même consommation à domicile facturée au tarif de base actuel : ' + money(hk * baseP) + ' (' + txt + ' avec ton mix réel).</p>';
+    }
+
+    // regroupement par période
+    var groups = {};
+    list.forEach(function (e) {
+      var k = periodKey(e.date);
+      (groups[k] = groups[k] || []).push(e);
+    });
+    var keys = Object.keys(groups).sort().reverse();
+    var gname = st.gran === 'year' ? 'année' : st.gran === 'quarter' ? 'trimestre' : 'mois';
+
+    html += '<div class="sub"><h3>Énergie et coût par ' + gname + '</h3><div class="scroll"><table><thead><tr>'
+      + '<th>Période</th><th>HC kWh</th><th>HP kWh</th><th>Base kWh</th><th>Borne kWh</th><th>Total kWh</th><th>Coût</th></tr></thead><tbody>';
+    keys.forEach(function (k) {
+      var g = agg(groups[k]);
+      html += '<tr><td>' + periodLabel(k) + '</td><td>' + kwh(g.hc) + '</td><td>' + kwh(g.hp) + '</td><td>' + kwh(g.base) + '</td><td>' + kwh(g.borne)
+        + '</td><td>' + kwh(g.k) + '</td><td>' + (g.pk > 0 ? money(g.c) : '—') + '</td></tr>';
+    });
+    html += '</tbody><tfoot><tr><td>Total</td><td>' + kwh(T.hc) + '</td><td>' + kwh(T.hp) + '</td><td>' + kwh(T.base) + '</td><td>' + kwh(T.borne)
+      + '</td><td>' + kwh(T.k) + '</td><td>' + money(T.pk > 0 ? T.c : null) + '</td></tr></tfoot></table></div></div>';
+
+    if (T.km > 0) {
+      html += '<div class="sub"><h3>Consommation par ' + gname + '</h3><div class="scroll"><table><thead><tr>'
+        + '<th>Période</th><th>km</th><th>kWh avec km</th><th>' + consUnit() + '</th><th>€/100 km</th></tr></thead><tbody>';
+      keys.forEach(function (k) {
+        var g = agg(groups[k]);
+        html += '<tr><td>' + periodLabel(k) + '</td><td>' + (g.km > 0 ? nfFlex.format(g.km) : '—') + '</td><td>' + (g.km > 0 ? kwh(g.kk) : '—')
+          + '</td><td>' + consText(consVal(g.kk, g.km)) + '</td><td>' + per100(g) + '</td></tr>';
+      });
+      html += '</tbody><tfoot><tr><td>Total</td><td>' + nfFlex.format(T.km) + '</td><td>' + kwh(T.kk)
+        + '</td><td>' + consText(consVal(T.kk, T.km)) + '</td><td>' + per100(T) + '</td></tr></tfoot></table></div></div>';
+    }
+
+    if (B.n || B.m) {
+      var sg = {};
+      ss.forEach(function (x) { var pk = periodKey(x.date); (sg[pk] = sg[pk] || []).push(x); });
+      html += '<div class="sub"><h3>Batterie par ' + gname + '</h3><div class="scroll"><table><thead><tr>'
+        + '<th>Période</th><th>kWh stockés</th><th>Rendement</th><th>kWh tirés</th><th>km</th><th>' + consUnit() + ' (batterie)</th></tr></thead><tbody>';
+      function brow(label, g) {
+        return '<tr><td>' + label + '</td><td>' + (g.n ? kwh(g.st) : '—') + '</td><td>' + effText(g) + '</td><td>' + (g.m ? kwh(g.dr) : '—')
+          + '</td><td>' + (g.m ? nfFlex.format(g.kmi) : '—') + '</td><td>' + (g.m ? consText(consVal(g.dr, g.kmi)) : '—') + '</td></tr>';
+      }
+      Object.keys(sg).sort().reverse().forEach(function (pk) { html += brow(periodLabel(pk), battAgg(sg[pk])); });
+      html += '</tbody><tfoot>' + brow('Total', B) + '</tfoot></table></div></div>';
+    }
+    html += '<div class="sub"><h3>Par tarif</h3><div class="scroll"><table><thead><tr>'
+      + '<th>Tarif</th><th>kWh</th><th>Part</th><th>Coût</th><th>€/kWh moyen</th></tr></thead><tbody>';
+    ORDER.forEach(function (t) {
+      var b = agg(list.filter(function (e) { return e.type === t; }));
+      if (b.k <= 0) return;
+      html += '<tr><td><span class="dot" style="background:' + COLORS[t] + '"></span>' + TYPES[t] + '</td><td>' + kwh(b.k)
+        + '</td><td>' + nf2.format(b.k / T.k * 100) + ' %</td><td>' + money(b.pk > 0 ? b.c : null)
+        + '</td><td>' + (b.pk > 0 ? nf4.format(b.c / b.pk) : '—') + '</td></tr>';
+    });
+    html += '</tbody></table></div></div>';
+    el.innerHTML = html;
+  }
+
+  var editingId = null;
+
+  function val(n) { return n == null ? '' : String(n).replace('.', ','); }
+
+  function editFormHtml(e) {
+    function opt(v) { return '<option value="' + v + '"' + (e.type === v ? ' selected' : '') + '>' + TYPES[v] + '</option>'; }
+    return '<div class="hrow editing">'
+      + '<div class="grid two">'
+      + '<div><label for="e-date">Date</label><input type="date" id="e-date" value="' + esc(e.date) + '"></div>'
+      + '<div><label for="e-kwh">Énergie <span class="unit">kWh</span></label><input type="text" id="e-kwh" inputmode="decimal" value="' + val(e.kwh) + '"></div>'
+      + '<div><label for="e-type">Tarif</label><select id="e-type">' + opt('hc') + opt('hp') + opt('base') + opt('borne') + '</select></div>'
+      + '<div><label for="e-price">Prix <span class="unit">€/kWh (vide = sans tarif)</span></label>'
+      + '<input type="text" id="e-price" inputmode="decimal" value="' + val(e.price) + '"></div>'
+      + '</div>'
+      + '<div class="grid km" style="margin-top:12px">'
+      + '<div><label for="e-odo0">Compteur début</label><input type="text" id="e-odo0" inputmode="decimal" placeholder="km" value="' + val(e.odoStart) + '"></div>'
+      + '<div><label for="e-odo1">Compteur fin</label><input type="text" id="e-odo1" inputmode="decimal" placeholder="km" value="' + val(e.odoEnd) + '"></div>'
+      + '<div><label for="e-km">Parcourus</label><input type="text" id="e-km" inputmode="decimal" placeholder="km" value="' + val(e.km) + '"></div>'
+      + '</div>'
+      + '<p class="note-line">Kilomètres : renseigne deux champs sur trois, le troisième sera calculé à l\'enregistrement. Laisse tout vide pour retirer les kilomètres.</p>'
+      + '<div class="grid two" style="margin-top:12px">'
+      + '<div><label for="e-bb">Batterie avant <span class="unit">%</span></label><input type="text" id="e-bb" inputmode="decimal" value="' + val(e.bb) + '"></div>'
+      + '<div><label for="e-ba">Batterie après <span class="unit">%</span></label><input type="text" id="e-ba" inputmode="decimal" value="' + val(e.ba) + '"></div>'
+      + '</div>'
+      + '<div style="margin-top:12px"><label for="e-note">Note</label><input type="text" id="e-note" value="' + esc(e.note || '') + '"></div>'
+      + '<div class="actions">'
+      + '<button type="button" data-save="' + esc(e.id) + '">Enregistrer</button>'
+      + '<button type="button" class="ghost" data-cancel="1">Annuler</button>'
+      + '<button type="button" class="ghost small" data-curprice="1">Mettre le tarif actuel</button>'
+      + '</div>'
+      + '<p class="warn" id="e-err" role="alert"></p>'
+      + '</div>';
+  }
+
+  function renderHist() {
+    var el = $('hist');
+    if (!state.entries.length) {
+      el.innerHTML = "<p class=\"empty\">L'historique est vide.</p>";
+      return;
+    }
+    var sm = {};
+    sessionsAll().forEach(function (x) { sm[x.id] = x; });
+    var sorted = state.entries.slice().sort(function (a, b) {
+      return a.date < b.date ? 1 : a.date > b.date ? -1 : (a.id < b.id ? 1 : -1);
+    });
+    var html = '<p class="note-line" style="margin-top:0">Touche « Modifier » pour corriger une charge. Pour en effacer une : « Supprimer » puis « Confirmer ». Une charge répartie en heures creuses et pleines forme deux lignes, à modifier séparément.</p>';
+    sorted.forEach(function (e) {
+      if (editingId === e.id) { html += editFormHtml(e); return; }
+      var armed = pendingDelete === e.id;
+      var meta = '<b>' + kwh(e.kwh) + ' kWh</b>'
+        + ' · ' + (e.price == null ? 'sans tarif' : nf4.format(e.price) + ' €/kWh')
+        + ' · <b>' + money(cost(e)) + '</b>';
+      if (e.km > 0) {
+        meta += ' · ' + nfFlex.format(e.km) + ' km';
+        if (e.kmTotal && Math.abs(e.kmTotal - e.km) > 0.0005) meta += ' (part de ' + nfFlex.format(e.kmTotal) + ' km)';
+        meta += ' · <b>' + consText(consVal(e.kwh, e.km)) + ' ' + consUnit() + '</b>';
+      }
+      if (e.odoStart != null && e.odoEnd != null) meta += ' · compteur ' + nfFlex.format(e.odoStart) + ' → ' + nfFlex.format(e.odoEnd);
+      if (e.bb != null && e.ba != null) {
+        var ses = sm[e.sid || e.id];
+        meta += ' · batterie ' + nfFlex.format(e.bb) + ' → ' + nfFlex.format(e.ba) + ' %';
+        if (ses && ses.stored > 0) meta += ' · ' + kwh(ses.stored) + ' kWh stockés · rendement <b>' + nf1.format(ses.stored / ses.kwh * 100) + ' %</b>';
+        if (ses && ses.drawn > 0) meta += ' · conso batterie <b>' + consText(consVal(ses.drawn, ses.km)) + ' ' + consUnit() + '</b>';
+        if (ses && ses.parts > 1) meta += ' (valeurs de la charge complète)';
+      }
+      if (e.note) meta += ' · ' + esc(e.note);
+      html += '<div class="hrow">'
+        + '<div class="top">' + fmtDate(e.date) + ' · <span class="dot" style="background:' + COLORS[e.type] + '"></span>' + TYPES[e.type] + '</div>'
+        + '<div class="meta">' + meta + '</div>'
+        + '<div class="acts">'
+        + '<button type="button" class="small ghost" data-edit="' + esc(e.id) + '">Modifier</button>'
+        + '<button type="button" class="small ' + (armed ? 'danger' : 'ghost') + '" data-del="' + esc(e.id) + '">'
+        + (armed ? 'Confirmer' : 'Supprimer') + '</button>'
+        + '</div></div>';
+    });
+    el.innerHTML = html;
+  }
+
+  function saveEdit(id) {
+    var e = state.entries.filter(function (x) { return x.id === id; })[0];
+    if (!e) { editingId = null; renderHist(); return; }
+    var err = $('e-err');
+    var date = $('e-date').value, k = num($('e-kwh').value);
+    if (!date) { err.textContent = 'Choisis une date.'; return; }
+    if (k == null || k <= 0) { err.textContent = 'Saisis un nombre de kWh supérieur à 0.'; return; }
+    var priceRaw = $('e-price').value.trim(), price = null;
+    if (priceRaw !== '') {
+      price = num(priceRaw);
+      if (price == null || price < 0) { err.textContent = 'Le prix doit être un nombre positif, ou vide.'; return; }
+    }
+    var o0 = num($('e-odo0').value), o1 = num($('e-odo1').value), km = num($('e-km').value);
+    if (km == null && o0 != null && o1 != null) km = o1 - o0;
+    if (km != null && km <= 0) { err.textContent = 'Les kilomètres parcourus doivent être supérieurs à 0.'; return; }
+    if (o0 != null && o1 != null && o1 < o0) { err.textContent = 'Le compteur de fin est inférieur au compteur de début.'; return; }
+    if (km != null && o0 != null && o1 != null && Math.abs((o1 - o0) - km) > 0.05) {
+      err.textContent = 'Les trois valeurs ne concordent pas : vide-en une pour qu\'elle soit recalculée.'; return;
+    }
+    if (km != null && o0 != null && o1 == null) o1 = o0 + km;
+    if (km != null && o1 != null && o0 == null) o0 = o1 - km;
+
+    var bb = num($('e-bb').value), ba = num($('e-ba').value);
+    if ((bb == null) !== (ba == null)) { err.textContent = 'Renseigne les deux niveaux de batterie, ou aucun.'; return; }
+    if (bb != null && (bb < 0 || ba > 100 || ba <= bb)) { err.textContent = 'Batterie : niveaux entre 0 et 100, avec « après » supérieur à « avant ».'; return; }
+    e.date = date;
+    e.kwh = r3(k);
+    e.type = $('e-type').value;
+    e.price = price;
+    e.note = $('e-note').value.trim();
+    state.entries.forEach(function (x) {
+      if ((x.sid || x.id) !== (e.sid || e.id)) return;
+      if (bb != null) { x.bb = bb; x.ba = ba; } else { delete x.bb; delete x.ba; }
+    });
+    if (km != null) { e.km = r3(km); e.kmTotal = r3(km); } else { delete e.km; delete e.kmTotal; }
+    if (o0 != null) e.odoStart = o0; else delete e.odoStart;
+    if (o1 != null) e.odoEnd = o1; else delete e.odoEnd;
+    editingId = null;
+    save(); render();
+  }
+
+  $('hist').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b) return;
+    if (b.hasAttribute('data-edit')) {
+      editingId = b.getAttribute('data-edit');
+      pendingDelete = null;
+      renderHist();
+      var f = $('e-kwh');
+      if (f) { f.focus(); f.scrollIntoView({ block: 'center' }); }
+      return;
+    }
+    if (b.hasAttribute('data-cancel')) { editingId = null; renderHist(); return; }
+    if (b.hasAttribute('data-save')) { saveEdit(b.getAttribute('data-save')); return; }
+    if (b.hasAttribute('data-curprice')) {
+      var p = currentPrice($('e-type').value);
+      $('e-price').value = p == null ? '' : String(p).replace('.', ',');
+      if (p == null) $('e-err').textContent = 'Ce tarif n\'est pas renseigné dans « Mes tarifs ».';
+      return;
+    }
+    if (b.hasAttribute('data-del')) {
+      var id = b.getAttribute('data-del');
+      if (pendingDelete === id) {
+        state.entries = state.entries.filter(function (e) { return e.id !== id; });
+        pendingDelete = null;
+        save(); render();
+        return;
+      }
+      pendingDelete = id;
+      clearTimeout(pendingTimer);
+      pendingTimer = setTimeout(function () { pendingDelete = null; if (!editingId) renderHist(); }, 3500);
+      renderHist();
+    }
+  });
+
+  /* ---------- Sauvegarde CSV ---------- */
+  function toCsv() {
+    var lines = ['date;tarif;kwh;prix_kwh;note;km;compteur_debut;compteur_fin;batt_avant;batt_apres;session'];
+    function c(n) { return n == null ? '' : String(n).replace('.', ','); }
+    state.entries.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).forEach(function (e) {
+      lines.push([
+        e.date, e.type, c(e.kwh), c(e.price),
+        String(e.note || '').replace(/[;\r\n]+/g, ' '),
+        c(e.km), c(e.odoStart), c(e.odoEnd), c(e.bb), c(e.ba), e.sid || e.id
+      ].join(';'));
+    });
+    return lines.join('\n');
+  }
+  function bmsg(t) {
+    var el = $('backup-msg');
+    el.textContent = t;
+    setTimeout(function () { el.textContent = ''; }, 4000);
+  }
+  $('export').addEventListener('click', function () {
+    $('csv').value = toCsv();
+    bmsg(state.entries.length + ' charge(s) exportée(s). Copie le texte pour le garder.');
+  });
+  $('copy').addEventListener('click', function () {
+    var ta = $('csv');
+    if (!ta.value) ta.value = toCsv();
+    ta.focus(); ta.select();
+    var done = false;
+    try { done = document.execCommand('copy'); } catch (e) {}
+    bmsg(done ? 'Copié.' : 'Sélectionné : fais « Copier » avec ton clavier ou ton menu.');
+  });
+  $('import').addEventListener('click', function () {
+    var rows = $('csv').value.split(/\r?\n/).map(function (l) { return l.trim(); }).filter(Boolean);
+    var added = 0, skipped = 0, bad = 0, sidMap = {};
+    rows.forEach(function (line) {
+      var c = line.split(';');
+      if (!/^\d{4}-\d{2}-\d{2}$/.test((c[0] || '').trim())) { if (c[0] !== 'date') bad++; return; }
+      var type = (c[1] || '').trim().toLowerCase();
+      var k = num(c[2]);
+      if (!TYPES[type] || k == null || k <= 0) { bad++; return; }
+      var note = (c[4] || '').trim();
+      var km = num(c[5]);
+      var dup = state.entries.some(function (e) {
+        return e.date === c[0].trim() && e.type === type && Math.abs(e.kwh - k) < 0.0005 && (e.note || '') === note
+          && Math.abs((e.km || 0) - (km || 0)) < 0.0005;
+      });
+      if (dup) { skipped++; return; }
+      var e = {
+        id: Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
+        date: c[0].trim(), kwh: k, type: type, price: num(c[3]), note: note
+      };
+      var sk = (c[10] || '').trim(), nid = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+      e.sid = sk ? (sidMap[sk] = sidMap[sk] || nid) : nid;
+      var ib0 = num(c[8]), ib1 = num(c[9]);
+      if (ib0 != null && ib1 != null) { e.bb = ib0; e.ba = ib1; }
+      if (km != null && km > 0) {
+        e.km = km; e.kmTotal = km;
+        var o0 = num(c[6]), o1 = num(c[7]);
+        if (o0 != null) e.odoStart = o0;
+        if (o1 != null) e.odoEnd = o1;
+      }
+      state.entries.push(e);
+      added++;
+    });
+    save(); render();
+    bmsg(added + ' ajoutée(s), ' + skipped + ' doublon(s) ignoré(s)' + (bad ? ', ' + bad + ' ligne(s) illisible(s)' : '') + '.');
+  });
+
+  /* ---------- Onglets, autonomie, graphiques ---------- */
+  function showTab(n) {
+    ['saisie', 'synth'].forEach(function (k) {
+      $('view-' + k).hidden = k !== n;
+      $('tab-' + k).setAttribute('aria-selected', k === n ? 'true' : 'false');
+    });
+    window.scrollTo(0, 0);
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-tab]'), function (b) {
+    b.addEventListener('click', function () { showTab(b.getAttribute('data-tab')); });
+  });
+
+  var rangePct = 100, rm = null;
+  function pctile(a, p) { var i = (a.length - 1) * p, lo = Math.floor(i), hi = Math.ceil(i); return a[lo] + (a[hi] - a[lo]) * (i - lo); }
+
+  function rangeModel() {
+    var cap = battCap();
+    if (!cap) return { err: 'Renseigne la capacité de ta batterie dans « Mes tarifs et batterie » (onglet Saisie).' };
+    var all = sessionsAll(), n = state.settings.rbase === '10' ? 10 : 0;
+    var B = battAgg(all), eff = B.kst > 0 ? Math.min(1, B.st / B.kst) : null;
+    var sd = all.filter(function (s) { return s.drawn > 0 && s.km > 0; });
+    var sk = all.filter(function (s) { return s.km > 0 && s.kwh > 0; });
+    if (n) { sd = sd.slice(-n); sk = sk.slice(-n); }
+    var m = { cap: cap, eff: eff }, smp, a = 0, b = 0;
+    if (sd.length >= 2) {
+      m.method = 'bat'; m.n = sd.length;
+      sd.forEach(function (s) { a += s.drawn; b += s.km; });
+      m.typ = b / a * cap; m.kwh100 = a / b * 100;
+      smp = sd.map(function (s) { return s.km / s.drawn * cap; });
+    } else if (sk.length) {
+      var e = eff || 0.9;
+      m.method = 'wall'; m.n = sk.length; m.assumed = !eff;
+      sk.forEach(function (s) { a += s.kwh; b += s.km; });
+      m.typ = b / a * cap / e; m.kwh100 = a * e / b * 100;
+      smp = sk.map(function (s) { return s.km / s.kwh * cap / e; });
+    } else {
+      return { err: 'Ajoute quelques charges avec leurs kilomètres (et les niveaux de batterie pour plus de précision) : l’estimation apparaîtra ici.' };
+    }
+    smp.sort(function (x, y) { return x - y; });
+    if (smp.length >= 4) { m.lo = pctile(smp, 0.25); m.hi = pctile(smp, 0.75); }
+    else { m.lo = smp[0]; m.hi = smp[smp.length - 1]; }
+    m.lo = Math.min(m.lo, m.typ); m.hi = Math.max(m.hi, m.typ);
+    return m;
+  }
+  function kmR(v) { return nf0.format(Math.round(v)); }
+  function updateRangeOut() {
+    if (!rm || rm.err || !$('r-out')) return;
+    var f = rangePct / 100;
+    $('r-pv').textContent = rangePct + ' %';
+    $('r-out').textContent = '≈ ' + kmR(rm.typ * f) + ' km (entre ' + kmR(rm.lo * f) + ' et ' + kmR(rm.hi * f) + ')';
+  }
+  function renderRange() {
+    var el = $('range');
+    rm = rangeModel();
+    if (rm.err) { el.innerHTML = '<p class="r-empty">' + rm.err + '</p>'; return; }
+    var mx = rm.hi * 1.1, pos = function (v) { return (v / mx * 100).toFixed(1) + '%'; };
+    var basis = rm.method === 'bat'
+      ? 'Calcul sur ' + rm.n + ' trajets avec niveaux de batterie : ' + nf1.format(rm.kwh100) + ' kWh/100 km côté batterie, pour ' + nfFlex.format(rm.cap) + ' kWh utiles.'
+      : 'Calcul sur ' + rm.n + ' charge' + (rm.n > 1 ? 's' : '') + ' avec kilomètres, rendement de charge ' + (rm.assumed ? 'supposé à 90 % (renseigne les niveaux de batterie pour l’affiner)' : nf1.format(rm.eff * 100) + ' %') + '.';
+    var h = '<div class="r-v">' + kmR(rm.typ) + ' <small>km, batterie pleine</small></div>'
+      + '<p class="r-sub">Plutôt entre <b>' + kmR(rm.lo) + '</b> et <b>' + kmR(rm.hi) + '</b> km selon la conduite.</p>'
+      + '<div class="gauge" role="img" aria-label="Fourchette d’autonomie"><i class="band" style="left:' + pos(rm.lo) + ';width:' + ((rm.hi - rm.lo) / mx * 100).toFixed(1) + '%"></i><i class="mark" style="left:' + pos(rm.typ) + '"></i></div>'
+      + '<div class="gl2"><span>0 km</span><span>' + kmR(mx) + ' km</span></div>'
+      + '<div class="r-tiles">';
+    [100, 80, 50, 20].forEach(function (p) { h += '<div><b>' + kmR(rm.typ * p / 100) + '</b><span>km à ' + p + ' %</span></div>'; });
+    h += '</div><label for="r-pct">Je pars avec <b id="r-pv"></b> de batterie</label>'
+      + '<input type="range" id="r-pct" min="5" max="100" step="5" value="' + rangePct + '">'
+      + '<div class="r-out" id="r-out" aria-live="polite"></div>'
+      + '<label for="r-base">Calculer à partir de</label>'
+      + '<select id="r-base"><option value="all">Toutes les charges</option><option value="10">Les 10 dernières charges</option></select>'
+      + '<p class="r-basis">' + basis + ' Estimation indicative : vitesse, météo et chauffage la font varier.</p>';
+    el.innerHTML = h;
+    $('r-base').value = state.settings.rbase === '10' ? '10' : 'all';
+    $('r-base').addEventListener('change', function () { state.settings.rbase = $('r-base').value; save(); renderRange(); });
+    $('r-pct').addEventListener('input', function () { rangePct = +$('r-pct').value; updateRangeOut(); });
+    updateRangeOut();
+  }
+
+  function niceMax(v) { var p = Math.pow(10, Math.floor(Math.log10(v || 1))), f = v / p; return (f <= 1 ? 1 : f <= 2 ? 2 : f <= 5 ? 5 : 10) * p; }
+  function shortLbl(key) {
+    var g = state.settings.gran;
+    if (g === 'year') return key;
+    if (g === 'quarter') { var p = key.split('-T'); return 'T' + p[1] + ' ' + p[0].slice(2); }
+    var q = key.split('-');
+    return new Date(+q[0], +q[1] - 1, 1).toLocaleDateString('fr-FR', { month: 'short' }).replace('.', '') + ' ' + q[0].slice(2);
+  }
+  function bars(items, label) {
+    var W = 640, H = 250, l = 44, r = 8, t = 24, b = 30, iw = W - l - r, ih = H - t - b, mx = 0;
+    items.forEach(function (i) { i.tot = i.segs.reduce(function (a, s) { return a + s.v; }, 0); if (i.tot > mx) mx = i.tot; });
+    mx = niceMax(mx || 1);
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '">';
+    for (var g = 0; g <= 4; g++) {
+      var y = t + ih - ih * g / 4;
+      s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y + '" y2="' + y + '" class="gl"/><text x="' + (l - 6) + '" y="' + (y + 4) + '" class="ax" text-anchor="end">' + nfFlex.format(mx * g / 4) + '</text>';
+    }
+    var bw = iw / items.length, w = Math.min(48, bw * 0.64);
+    items.forEach(function (it, i) {
+      var x = l + bw * i + (bw - w) / 2, y0 = t + ih;
+      it.segs.forEach(function (sg) {
+        if (sg.v <= 0) return;
+        var h = sg.v / mx * ih; y0 -= h;
+        s += '<rect x="' + x.toFixed(1) + '" y="' + y0.toFixed(1) + '" width="' + w.toFixed(1) + '" height="' + h.toFixed(1) + '" rx="2" style="fill:' + sg.c + '"><title>' + it.label + ' · ' + sg.n + ' : ' + nf1.format(sg.v) + '</title></rect>';
+      });
+      s += '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (y0 - 6).toFixed(1) + '" class="tp" text-anchor="middle">' + it.top + '</text>'
+        + '<text x="' + (x + w / 2).toFixed(1) + '" y="' + (H - 8) + '" class="ax" text-anchor="middle">' + it.label + '</text>';
+    });
+    return s + '</svg>';
+  }
+  function lineChart(pts, avg, label) {
+    var W = 640, H = 250, l = 44, r = 14, t = 16, b = 30, iw = W - l - r, ih = H - t - b;
+    var vs = pts.map(function (p) { return p.v; }), mn = Math.min.apply(null, vs), mx = Math.max.apply(null, vs);
+    if (mx - mn < 1e-9) { mn -= 1; mx += 1; }
+    var pad = (mx - mn) * 0.2; mn -= pad; mx += pad;
+    var t0 = pts[0].t, span = (pts[pts.length - 1].t - t0) || 1;
+    var X = function (p) { return l + (p.t - t0) / span * iw; }, Y = function (v) { return t + ih - (v - mn) / (mx - mn) * ih; };
+    var s = '<svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + label + '">';
+    for (var g = 0; g <= 4; g++) {
+      var v = mn + (mx - mn) * g / 4, y = Y(v);
+      s += '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + y + '" y2="' + y + '" class="gl"/><text x="' + (l - 6) + '" y="' + (y + 4) + '" class="ax" text-anchor="end">' + consText(v) + '</text>';
+    }
+    var line = pts.map(function (p, i) { return (i ? 'L' : 'M') + X(p).toFixed(1) + ' ' + Y(p.v).toFixed(1); }).join(' ');
+    s += '<path d="' + line + ' L' + X(pts[pts.length - 1]).toFixed(1) + ' ' + (t + ih) + ' L' + X(pts[0]).toFixed(1) + ' ' + (t + ih) + ' Z" style="fill:var(--hc);opacity:.12"/>'
+      + '<line x1="' + l + '" x2="' + (W - r) + '" y1="' + Y(avg) + '" y2="' + Y(avg) + '" style="stroke:var(--hp);stroke-width:2;stroke-dasharray:6 5"/>'
+      + '<text x="' + (W - r) + '" y="' + (Y(avg) - 6) + '" class="ax" text-anchor="end" style="fill:var(--hp)">moyenne ' + consText(avg) + '</text>'
+      + '<path d="' + line + '" style="fill:none;stroke:var(--hc);stroke-width:2.5;stroke-linejoin:round"/>';
+    pts.forEach(function (p) { s += '<circle cx="' + X(p).toFixed(1) + '" cy="' + Y(p.v).toFixed(1) + '" r="4.5" style="fill:var(--surface);stroke:var(--hc);stroke-width:2.5"><title>' + fmtDate(p.d) + ' : ' + consText(p.v) + ' ' + consUnit() + '</title></circle>'; });
+    s += '<text x="' + l + '" y="' + (H - 8) + '" class="ax">' + fmtDate(pts[0].d) + '</text><text x="' + (W - r) + '" y="' + (H - 8) + '" class="ax" text-anchor="end">' + fmtDate(pts[pts.length - 1].d) + '</text>';
+    return s + '</svg>';
+  }
+  function donut(T) {
+    var R = 42, C = 2 * Math.PI * R, off = 0;
+    var s = '<svg viewBox="0 0 120 120" class="donut" role="img" aria-label="Répartition des kWh par tarif"><g transform="rotate(-90 60 60)">';
+    ORDER.forEach(function (t) {
+      if (T[t] > 0) { var d = T[t] / T.k * C; s += '<circle cx="60" cy="60" r="' + R + '" fill="none" stroke-width="16" style="stroke:' + COLORS[t] + '" stroke-dasharray="' + d.toFixed(2) + ' ' + (C - d).toFixed(2) + '" stroke-dashoffset="' + (-off).toFixed(2) + '"/>'; off += d; }
+    });
+    return s + '</g><text x="60" y="60" text-anchor="middle" class="dv">' + nf0.format(T.k) + '</text><text x="60" y="76" text-anchor="middle" class="dk">kWh</text></svg>';
+  }
+  function chartBox(title, cap, body) { return '<div class="chart"><h3>' + title + '</h3><p class="cap">' + cap + '</p>' + body + '</div>'; }
+
+  function renderCharts() {
+    var el = $('charts'), st = state.settings;
+    function inr(d) { return (!st.from || d >= st.from) && (!st.to || d <= st.to); }
+    var list = state.entries.filter(function (e) { return inr(e.date); });
+    if (!list.length) { el.innerHTML = ''; return; }
+    var gr = {};
+    list.forEach(function (e) { var k = periodKey(e.date); (gr[k] = gr[k] || []).push(e); });
+    var keys = Object.keys(gr).sort().slice(-12);
+    var gname = st.gran === 'year' ? 'année' : st.gran === 'quarter' ? 'trimestre' : 'mois';
+    var h = '';
+    var i1 = keys.map(function (k) {
+      var g = agg(gr[k]);
+      return { label: shortLbl(k), top: g.pk > 0 ? nf0.format(g.c) + ' €' : '', segs: [{ v: g.hc, c: 'var(--hc)', n: 'Heures creuses (kWh)' }, { v: g.hp, c: 'var(--hp)', n: 'Heures pleines (kWh)' }, { v: g.base, c: 'var(--base)', n: 'Base (kWh)' }, { v: g.borne, c: 'var(--borne)', n: 'Borne (kWh)' }] };
+    });
+    h += chartBox('Énergie et coût par ' + gname, 'kWh par tarif, coût de la période au-dessus de chaque barre.', bars(i1, 'Énergie et coût par période'));
+    var i2 = keys.filter(function (k) { return agg(gr[k]).km > 0; }).map(function (k) {
+      var g = agg(gr[k]);
+      return { label: shortLbl(k), top: nfFlex.format(g.km), segs: [{ v: g.km, c: 'var(--base)', n: 'km' }] };
+    });
+    if (i2.length) h += chartBox('Kilomètres par ' + gname, 'Distance parcourue sur les charges avec kilomètres.', bars(i2, 'Kilomètres par période'));
+    var ps = sessionsAll().filter(function (s) { return inr(s.date) && s.km > 0 && s.kwh > 0; }).map(function (s) { return { t: new Date(s.date + 'T12:00:00').getTime(), d: s.date, v: consVal(s.kwh, s.km), k: s.kwh, km: s.km }; });
+    if (ps.length >= 2) {
+      var ak = 0, am = 0; ps.forEach(function (p) { ak += p.k; am += p.km; });
+      h += chartBox('Consommation de chaque charge', consUnit() + ', charge par charge (mesurée à la prise).', lineChart(ps, consVal(ak, am), 'Consommation par charge'));
+    }
+    var T = agg(list), rows = '';
+    ORDER.forEach(function (t) {
+      var b = agg(list.filter(function (e) { return e.type === t; }));
+      if (b.k > 0) rows += '<tr><td><span class="dot" style="background:' + COLORS[t] + '"></span>' + TYPES[t] + '</td><td>' + nf0.format(b.k / T.k * 100) + ' %</td><td>' + (b.pk > 0 ? money(b.c) : '—') + '</td></tr>';
+    });
+    h += chartBox('Répartition par tarif', 'Part des kWh et coût.', '<div class="donut-row">' + donut(T) + '<table><thead><tr><th>Tarif</th><th>Part</th><th>Coût</th></tr></thead><tbody>' + rows + '</tbody></table></div>');
+    el.innerHTML = h;
+  }
+  function renderExtra() { renderRange(); renderCharts(); renderBackup(); }
+
+  /* ---------- Excel : import / export et sauvegarde ---------- */
+  try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+  var XLSX_URL = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+  function withXlsx(cb) {
+    if (window.XLSX) return cb(null);
+    var s = document.createElement('script');
+    s.src = XLSX_URL;
+    s.onload = function () { cb(null); };
+    s.onerror = function () { cb('Impossible de charger le lecteur Excel : vérifie ta connexion (nécessaire pour importer ou exporter).'); };
+    document.head.appendChild(s);
+  }
+  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function nrm(s) { return String(s == null ? '' : s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9%]+/g, ' ').trim(); }
+  function xDate(v) {
+    if (typeof v === 'number' && v > 20000 && v < 80000) return new Date(Math.round((v - 25569) * 864e5)).toISOString().slice(0, 10);
+    if (v instanceof Date) return ymd(v);
+    var t = String(v == null ? '' : v).trim(), m;
+    if ((m = t.match(/^(\d{4})-(\d{2})-(\d{2})/))) return m[1] + '-' + m[2] + '-' + m[3];
+    if ((m = t.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/))) return m[3] + '-' + ('0' + m[2]).slice(-2) + '-' + ('0' + m[1]).slice(-2);
+    return null;
+  }
+  function cNum(c) {
+    if (!c) return null;
+    if (typeof c.v === 'number') return c.v;
+    if (typeof c.v === 'string' && /^\s*-?[\d.,\s]+\s*$/.test(c.v)) return num(c.v);
+    if (c.f && /^[0-9.]+$/.test(c.f)) return parseFloat(c.f);
+    return null;
+  }
+  function mkEntry(o) {
+    var e = { id: uid(), sid: o.sid, date: o.date, kwh: o.kwh, type: o.type, price: o.price, note: o.note || '' };
+    if (o.bb != null && o.ba != null && o.ba > o.bb && o.bb >= 0 && o.ba <= 100) { e.bb = o.bb; e.ba = o.ba; }
+    if (o.km > 0) {
+      e.km = r3(o.km); e.kmTotal = r3(o.kmTotal || o.km);
+      if (o.o0 != null) e.odoStart = o.o0;
+      if (o.o1 != null) e.odoEnd = o.o1;
+    }
+    return e;
+  }
+  function parseWorkbook(wb) {
+    var X = window.XLSX, R = X.utils, res = { entries: [], manual: 0, tariffs: null, battery: null, skipped: 0 }, sidMap = {};
+    wb.SheetNames.forEach(function (n) {
+      if (nrm(n) !== 'tarifs') return;
+      var ws = wb.Sheets[n], t = {};
+      for (var r = 0; r < 30; r++) {
+        var a = ws[R.encode_cell({ r: r, c: 0 })], b = cNum(ws[R.encode_cell({ r: r, c: 1 })]);
+        if (!a || b == null) continue;
+        var l = nrm(a.v);
+        if (l.indexOf('heures pleines') === 0) t.hp = b; else if (l.indexOf('heures creuses') === 0) t.hc = b;
+        else if (l.indexOf('base') === 0) t.base = b; else if (l.indexOf('batterie') === 0) res.battery = b;
+      }
+      if (t.base != null || t.hp != null || t.hc != null) res.tariffs = t;
+    });
+    var tf = res.tariffs || {};
+    function price(type) { return tf[type] != null ? tf[type] : currentPrice(type); }
+    wb.SheetNames.forEach(function (n) {
+      var ws = wb.Sheets[n];
+      if (!ws['!ref']) return;
+      var rg = R.decode_range(ws['!ref']), hr = -1, col = {};
+      for (var r = rg.s.r; r <= Math.min(rg.e.r, rg.s.r + 20) && hr < 0; r++) {
+        var m = {};
+        for (var c = rg.s.c; c <= rg.e.c; c++) { var x = ws[R.encode_cell({ r: r, c: c })]; if (x && x.v != null) m[nrm(x.v)] = c; }
+        if (m['date'] != null && (m['kwh total'] != null || m['kwh'] != null)) { hr = r; col = m; }
+      }
+      if (hr < 0) return;
+      function cf(fn) { for (var k in col) if (fn(k)) return col[k]; return null; }
+      var flat = col['tarif'] != null && col['prix kwh'] != null;
+      var cD = col['date'], cK = col['kwh total'] != null ? col['kwh total'] : col['kwh'];
+      var cP = cf(function (k) { return k.indexOf('%') === 0 && k.indexOf('creuses') > 0; });
+      var cB = cf(function (k) { return k.indexOf('tarif de base') === 0; });
+      var cH = cf(function (k) { return k.indexOf('cout') === 0; });
+      var cO0 = col['compteur debut'], cO1 = col['compteur fin'], cKm = col['km parcourus'] != null ? col['km parcourus'] : col['km'];
+      var cBb = flat ? col['batt avant'] : cf(function (k) { return k.indexOf('batterie avant') === 0; });
+      var cBa = flat ? col['batt apres'] : cf(function (k) { return k.indexOf('batterie apres') === 0; });
+      var cN = col['note'], cS = col['session'], cT = col['tarif'], cPr = col['prix kwh'];
+      for (var r2 = hr + 1; r2 <= rg.e.r; r2++) {
+        var g = function (c) { return c == null ? null : ws[R.encode_cell({ r: r2, c: c })]; };
+        var dc = g(cD), date = xDate(dc && dc.v), k = cNum(g(cK));
+        if (!date || k == null || k <= 0) { if (dc && dc.v != null && dc.v !== '') res.skipped++; continue; }
+        var o0 = cNum(g(cO0)), o1 = cNum(g(cO1)), km = cNum(g(cKm));
+        if (!(km > 0)) km = (o0 != null && o1 != null && o1 > o0) ? o1 - o0 : null;
+        if (km > 0 && o0 != null && o1 == null) o1 = o0 + km;
+        if (km > 0 && o1 != null && o0 == null) o0 = o1 - km;
+        var nc = g(cN), note = nc && nc.t !== 'e' ? (typeof nc.v === 'number' ? String(nc.v) : (typeof nc.v === 'string' && nc.v.trim() !== '=' && !/^#[A-Z0-9\/!?]+$/.test(nc.v.trim()) ? nc.v.trim() : '')) : '';
+        var bb = cNum(g(cBb)), ba = cNum(g(cBa)), sid;
+        if (flat) {
+          var tp = nrm(g(cT) && g(cT).v);
+          if (!TYPES[tp]) { res.skipped++; continue; }
+          var sk = cS != null && g(cS) ? String(g(cS).v) : '';
+          sid = sk ? (sidMap[sk] = sidMap[sk] || uid()) : uid();
+          res.entries.push(mkEntry({ sid: sid, date: date, kwh: k, type: tp, price: cNum(g(cPr)), note: note, km: km, o0: o0, o1: o1, bb: bb, ba: ba }));
+          continue;
+        }
+        var pc = cNum(g(cP)), bf = g(cB), hc = g(cH), parts = [];
+        sid = uid();
+        if (hc && !hc.f && typeof hc.v === 'number' && hc.v > 0) {
+          parts.push({ type: 'borne', kwh: k, price: Math.round(hc.v / k * 1e6) / 1e6 });
+          res.manual++;
+        } else if (bf && nrm(bf.v) === 'oui') {
+          parts.push({ type: 'base', kwh: k, price: price('base') });
+        } else {
+          var f = pc == null ? 1 : (pc > 1 ? pc / 100 : pc);
+          f = Math.max(0, Math.min(1, f));
+          var a1 = r3(k * f), b1 = r3(k - a1);
+          if (a1 > 0) parts.push({ type: 'hc', kwh: a1, price: price('hc') });
+          if (b1 > 0) parts.push({ type: 'hp', kwh: b1, price: price('hp') });
+        }
+        parts.forEach(function (p) {
+          res.entries.push(mkEntry({ sid: sid, date: date, kwh: p.kwh, type: p.type, price: p.price, note: note, km: km > 0 ? km * p.kwh / k : null, kmTotal: km, o0: o0, o1: o1, bb: bb, ba: ba }));
+        });
+      }
+    });
+    return res;
+  }
+
+  var staged = null;
+  function xlMsg(t, err) { var el = $('xl-msg'); el.textContent = t; el.className = err ? 'warn' : 'note-line'; }
+  $('xl-pick').addEventListener('click', function () { $('xl-file').click(); });
+  $('xl-file').addEventListener('change', function () {
+    var inp = this, f = inp.files && inp.files[0];
+    if (!f) return;
+    xlMsg('Lecture du fichier…');
+    withXlsx(function (err) {
+      if (err) { xlMsg(err, true); return; }
+      var fr = new FileReader();
+      fr.onload = function () {
+        inp.value = '';
+        try {
+          var res = parseWorkbook(window.XLSX.read(fr.result, { type: 'array' }));
+          if (!res.entries.length) { xlMsg('Aucune charge reconnue : il faut un onglet avec les colonnes « Date » et « kWh total ».', true); return; }
+          staged = res;
+          var ds = res.entries.map(function (e) { return e.date; }).sort(), n = {};
+          res.entries.forEach(function (e) { n[e.sid] = 1; });
+          var t = Object.keys(n).length + ' charge(s) trouvée(s), du ' + fmtDate(ds[0]) + ' au ' + fmtDate(ds[ds.length - 1]);
+          if (res.manual) t += ' · ' + res.manual + ' avec un coût saisi à la main, reprise(s) comme « Borne / autre »';
+          if (res.tariffs || res.battery) t += ' · tarifs et batterie du fichier repris';
+          if (res.skipped) t += ' · ' + res.skipped + ' ligne(s) ignorée(s)';
+          xlMsg(t + '. Que veux-tu faire ?');
+          $('xl-actions').hidden = false;
+        } catch (e) { xlMsg('Fichier illisible : ' + e.message, true); }
+      };
+      fr.readAsArrayBuffer(f);
+    });
+  });
+  function commitStaged(replace) {
+    if (!staged) return;
+    var added = 0, skip = 0;
+    if (replace) state.entries = [];
+    staged.entries.forEach(function (e) {
+      var dup = state.entries.some(function (x) {
+        return x.date === e.date && x.type === e.type && Math.abs(x.kwh - e.kwh) < 0.0005 && (x.note || '') === (e.note || '') && Math.abs((x.km || 0) - (e.km || 0)) < 0.0005;
+      });
+      if (dup) { skip++; return; }
+      state.entries.push(e); added++;
+    });
+    if (staged.tariffs) ['base', 'hp', 'hc'].forEach(function (t) {
+      if (staged.tariffs[t] != null) { state.tariffs[t] = String(staged.tariffs[t]).replace('.', ','); $('p-' + t).value = state.tariffs[t]; }
+    });
+    if (staged.battery) { state.battery = String(staged.battery).replace('.', ','); $('p-batt').value = state.battery; }
+    staged = null; $('xl-actions').hidden = true;
+    save(); render();
+    xlMsg(added + ' ligne(s) importée(s)' + (skip ? ', ' + skip + ' doublon(s) ignoré(s)' : '') + '.');
+  }
+  $('xl-add').addEventListener('click', function () { commitStaged(false); });
+  $('xl-cancel').addEventListener('click', function () { staged = null; $('xl-actions').hidden = true; xlMsg(''); });
+  $('xl-rep').addEventListener('click', function () {
+    var b = this, lab = 'Remplacer tout l’historique';
+    if (b.dataset.arm !== '1') { b.dataset.arm = '1'; b.textContent = 'Confirmer : tout remplacer'; setTimeout(function () { b.dataset.arm = ''; b.textContent = lab; }, 4000); return; }
+    b.dataset.arm = ''; b.textContent = lab; commitStaged(true);
+  });
+  $('xl-export').addEventListener('click', function () {
+    withXlsx(function (err) {
+      if (err) { xlMsg(err, true); return; }
+      var X = window.XLSX, head = ['date', 'tarif', 'kwh', 'prix_kwh', 'note', 'km', 'compteur_debut', 'compteur_fin', 'batt_avant', 'batt_apres', 'session', 'cout_eur'];
+      function v(n) { return n == null ? '' : n; }
+      var rows = state.entries.slice().sort(function (a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; }).map(function (e) {
+        return [e.date, e.type, e.kwh, v(e.price), e.note || '', v(e.km), v(e.odoStart), v(e.odoEnd), v(e.bb), v(e.ba), e.sid || e.id, e.price == null ? '' : r3(e.kwh * e.price)];
+      });
+      var wb = X.utils.book_new();
+      X.utils.book_append_sheet(wb, X.utils.aoa_to_sheet([head].concat(rows)), 'Charges');
+      X.utils.book_append_sheet(wb, X.utils.aoa_to_sheet([['Mes tarifs', ''], ['', ''], ['Base (€/kWh)', num(state.tariffs.base)], ['Heures pleines (€/kWh)', num(state.tariffs.hp)], ['Heures creuses (€/kWh)', num(state.tariffs.hc)], ['Batterie (kWh utiles)', num(state.battery)]]), 'Tarifs');
+      X.writeFile(wb, 'suivi-recharge-' + today() + '.xlsx');
+      state.lastBackup = today(); save(); renderBackup();
+      xlMsg('Fichier exporté : garde-le précieusement, tu pourras le réimporter ici à tout moment.');
+    });
+  });
+  function renderBackup() {
+    var el = $('bk-status'), n = state.entries.length, lb = state.lastBackup;
+    if (!n) { el.className = 'warn'; el.textContent = 'Aucune charge enregistrée sur cet appareil. Si tu en avais, importe ton fichier Excel pour les retrouver.'; return; }
+    var days = lb ? Math.round((new Date(today()) - new Date(lb)) / 864e5) : null;
+    if (lb == null) { el.className = 'warn'; el.textContent = n + ' ligne(s) enregistrée(s) dans ce navigateur, jamais sauvegardée(s) : exporte-les en Excel pour ne rien perdre.'; }
+    else if (days > 14) { el.className = 'warn'; el.textContent = 'Dernière sauvegarde il y a ' + days + ' jours : pense à exporter à nouveau.'; }
+    else { el.className = 'note-line'; el.textContent = n + ' ligne(s) enregistrée(s) · dernière sauvegarde le ' + fmtDate(lb) + '.'; }
+    el.style.margin = '0';
+  }
+
+  function borneUnit(k) {
+    var p = num($('f-bprice').value), t = num($('f-btotal').value);
+    if (p != null && p >= 0) return Math.round(p * 1e6) / 1e6;
+    if (t != null && t >= 0 && k > 0) return Math.round(t / k * 1e6) / 1e6;
+    return null;
+  }
+
+  updatePreview();
+  render();
+})();
+</script>
+</body>
+</html>
